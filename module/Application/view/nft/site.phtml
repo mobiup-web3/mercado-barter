@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <?= $this->partial('nft/header'); ?>
+</head>
+
+<body>
+<!-- Preloader Start -->
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img src="assets/img/icon.png" class="" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Preloader Start -->
+
+<!-- Navbar Area -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <div class="row" style="align-items: center;">
+            <div class="col-xl-6 col-lg-5 col-md-12">
+                <div class="navbar-left navbar-header d-flex">
+
+                    <a class="navbar-brand" href="index.html">
+                        <img src="assets/img/logo.png" width="98">
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="header-button d-lg-none ml-auto mr-2 d-flex justify-content-center">
+                        <div class="btn-group">
+                            <a class="btn btn-primary" href="criar-nft.html">Criar NFT</a>
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn btn-outline-default" href="#" data-toggle="modal" data-target="#myModal2">Connect Wallet</a>
+                        </div>
+                    </div>
+
+                    <div class="collapse navbar-collapse">
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control" type="search" placeholder="Busque itens e autores" aria-label="Search">
+                            <i class="fas fa-search"></i>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-xl-6 col-lg-7 col-md-12 ml-auto">
+                <div class="navbar-header navbar-right ">
+                    <div class="collapse navbar-collapse navbar-menu" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                            <form class="form-inline my-2 my-lg-0 d-lg-none mt-3">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Busque itens e autores" aria-label="Search">
+                                <i class="fas fa-search"></i>
+                            </form>
+                            <li class="nav-item"><a class="nav-link" href="explorar.html">Explorar</a></li>
+                            <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+                            <li class="nav-item"><a class="nav-link" href="contato.html">Contato</a></li>
+                        </ul>
+                    </div>
+                    <div class="navbar-right-side">
+                        <div class="modal-taggle-button">
+                            <a href="criar-nft.html" class="btn btn-primary">Criar NFT</a>
+                            <a href="#" class="btn btn-outline-default" data-toggle="modal" data-target="#myModal2">Connect Wallet</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- End Navbar Area -->
+
+<!-- Main Banner -->
+<div class="main-banner bg-dark">
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="container">
+                <div class="row" style="align-items: center;">
+                    <div class="col-lg-7 col-md-12">
+                        <div class="hero-content">
+                            <h1>Disponibilize sua <span>obra</span> para o <span>mundo</span></h1>
+
+                            <p>Através do ITS NFT, você minta e disponibiliza a sua arte para compra e venda nos principais mkt-places do mundo </p>
+                            <a href="#" class="btn btn-primary">Saiba Mais</a>
+                        </div>
+                    </div>
+
+                    <div class="hero-image">
+                        <img src="assets/img/nft_banner.png" alt="IT'S NFT">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Main Banner -->
+
+<!-- Right Side Modal -->
+<div class="modal right fade" id="myModal2" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!--<div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>-->
+            <div class="modal-body">
+                <div class="modal-header-content">
+                    <div class="modal-header-content__avathar">
+                        <i class="fas fa-user-circle"></i> Minha carteira
+                    </div>
+                    <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+
+                <div class="modal-middle-content">
+                    <p>Connect with one of our available wallet providers or create a new one.</p>
+                </div>
+
+                <div class="modal-wallets">
+                    <ul class="list_wallets">
+                        <li class="list_wallets_item">
+                            <a href="#" class="list_wallets_item_link d-flex" data-toggle="modal" data-target="#myModal">
+                                <div class="list_wallets_item_link_left"><img alt="" height="30px" src="assets/img/icons/metamask-alternative.png"> MetaMask</div>
+                                <div class="ml-auto list_wallets_item_link_right">Popular</div>
+                            </a>
+                        </li>
+                        <li class="list_wallets_item">
+                            <a href="#" class="list_wallets_item_link d-flex">
+                                <div class="list_wallets_item_link_left"><img alt="" height="30px" src="assets/img/icons/walletlink-alternative.png"> Coinbase Wallet</div>
+                            </a>
+                        </li>
+                        <li class="list_wallets_item">
+                            <a href="#" class="list_wallets_item_link d-flex">
+                                <div class="list_wallets_item_link_left"><img alt="" height="30px" src="assets/img/icons/metamask-alternative.png"> MetaMask</div>
+                            </a>
+                        </li>
+                        <li class="list_wallets_item">
+                            <a href="#" class="list_wallets_item_link d-flex">
+                                <div class="list_wallets_item_link_left"><img alt="" height="30px" src="assets/img/icons/walletlink-alternative.png"> Coinbase Wallet</div>
+                            </a>
+                        </li>
+                    </ul>
+                    <a href="#" class="btn btn-grey btn-block wallets_show_more">Mais Opções</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Right Side Modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content modal-content-bs">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Conectar Wallet</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body modal-bs">
+                <h2 class="">Conectar com Metamask <img alt="" height="30px" src="assets/img/icons/metamask-alternative.png"></h2>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore consequatur inventore voluptas quisquam modi pariatur libero reprehenderit rem consequuntur atque!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-outline-default">Login</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- NFTs Area -->
+<section class="services-area ptb-100 bg-dark" style="padding-top:0;">
+    <div class="container">
+        <div class="section-title">
+            <h2>Melhores <span>NFTs</span> do IT'S NFT</h2>
+
+            <a href="explorar.html" class="read-more-btn">ver mais nfts</a>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="shorting-menu">
+                    <button class="btn btn-outline-secondary filter" data-filter="all">Últimos</button>
+                    <button class="btn btn-outline-secondary filter" data-filter=".arte">Arte</button>
+                    <button class="btn btn-outline-secondary filter" data-filter=".memes">Memes</button>
+                    <button class="btn btn-outline-secondary filter" data-filter=".musica">Música</button>
+                    <button class="btn btn-outline-secondary filter" data-filter=".videos">Vídeos</button>
+                    <button class="btn btn-outline-secondary filter" data-filter=".fotos">Fotos</button>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="heading-line s2"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container shorting">
+        <div class="row">
+
+            <div class="col-lg-3 mix arte col-md-6 col-sm-6">
+                <div class="single-services">
+                    <div class="card-media">
+                        <a href="#"><img src="assets/img/card-item.jpg" alt="Image"></a>
+                        <button class="wishlist-button heart"><i class="fas fa-heart"></i><span class="number-like"> 100</span></button>
+                        <div class="coming-soon">coming soon</div>
+                        <div class="featured-countdown">
+                            <span class="slogan"><i class="fas fa-fire"></i></span>
+                            <span class="js-countdown" data-timer="763164" data-labels=" :  ,  : , : , "></span>
+                        </div>
+                    </div>
+                    <div class="card-title">
+                        <h5><a href="detalhes-nft.html">Crystal Current Art</a></h5>
+                    </div>
+                    <div class="meta-info">
+                        <div class="author">
+                            <div class="avatar">
+                                <img src="assets/img/avt.jpg" alt="Image">
+                            </div>
+                            <div class="info">
+                                <span>Owned By</span>
+                                <h6> <a href="author.html">Ralph Garraway</a> </h6>
+                            </div>
+                        </div>
+                        <div class="price">
+                            <span>Current Bid</span>
+                            <h5> 4.89 ETH</h5>
+                        </div>
+                    </div>
+                    <a href="detalhes-nft.html" class="btn btn-outline-secondary btn-block mt-3">Place A Bid</a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 mix arte col-md-6 col-sm-6">
+                <div class="single-services">
+                    <div class="card-media">
+                        <a href="#"><img src="assets/img/card-item.jpg" alt="Image"></a>
+                    </div>
+                    <div class="card-title">
+                        <h5><a href="#">Deep Darkness Wave</a></h5>
+                    </div>
+                    <div class="meta-info">
+                        <div class="author">
+                            <div class="avatar">
+                                <img src="assets/img/avt.jpg" alt="Image">
+                            </div>
+                            <div class="info">
+                                <span>Owned By</span>
+                                <h6> <a href="#">Ralph Garraway</a> </h6>
+                            </div>
+                        </div>
+                        <div class="price">
+                            <span>Current Bid</span>
+                            <h5> 4.89 ETH</h5>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-outline-secondary btn-block mt-3">Place A Bid</a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 mix memes col-md-6 col-sm-6">
+                <div class="single-services">
+                    <div class="card-media">
+                        <a href="#"><img src="assets/img/card-item.jpg" alt="Image"></a>
+                    </div>
+                    <div class="card-title">
+                        <h5><a href="#">Olympian Crystal</a></h5>
+                    </div>
+                    <div class="meta-info">
+                        <div class="author">
+                            <div class="avatar">
+                                <img src="assets/img/avt.jpg" alt="Image">
+                            </div>
+                            <div class="info">
+                                <span>Owned By</span>
+                                <h6> <a href="#">Ralph Garraway</a> </h6>
+                            </div>
+                        </div>
+                        <div class="price">
+                            <span>Current Bid</span>
+                            <h5> 4.89 ETH</h5>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-outline-secondary btn-block mt-3">Place A Bid</a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 mix musica col-md-6 col-sm-6">
+                <div class="single-services">
+                    <div class="card-media">
+                        <a href="#"><img src="assets/img/card-item.jpg" alt="Image"></a>
+                    </div>
+                    <div class="card-title">
+                        <h5><a href="#">Dimensional Crystal</a></h5>
+                    </div>
+                    <div class="meta-info">
+                        <div class="author">
+                            <div class="avatar">
+                                <img src="assets/img/avt.jpg" alt="Image">
+                            </div>
+                            <div class="info">
+                                <span>Owned By</span>
+                                <h6> <a href="#">Ralph Garraway</a> </h6>
+                            </div>
+                        </div>
+                        <div class="price">
+                            <span>Current Bid</span>
+                            <h5> 4.89 ETH</h5>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-outline-secondary btn-block mt-3">Place A Bid</a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 mix memes col-md-6 col-sm-6">
+                <div class="single-services">
+                    <div class="card-media">
+                        <a href="#"><img src="assets/img/card-item.jpg" alt="Image"></a>
+                    </div>
+                    <div class="card-title">
+                        <h5><a href="#">Aurora of Courage</a></h5>
+                    </div>
+                    <div class="meta-info">
+                        <div class="author">
+                            <div class="avatar">
+                                <img src="assets/img/avt.jpg" alt="Image">
+                            </div>
+                            <div class="info">
+                                <span>Owned By</span>
+                                <h6> <a href="#">Ralph Garraway</a> </h6>
+                            </div>
+                        </div>
+                        <div class="price">
+                            <span>Current Bid</span>
+                            <h5> 4.89 ETH</h5>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-outline-secondary btn-block mt-3">Place A Bid</a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 mix videos col-md-6 col-sm-6">
+                <div class="single-services">
+                    <div class="card-media">
+                        <a href="#"><img src="assets/img/card-item.jpg" alt="Image"></a>
+                    </div>
+                    <div class="card-title">
+                        <h5><a href="#">Eye Paradox Art</a></h5>
+                    </div>
+                    <div class="meta-info">
+                        <div class="author">
+                            <div class="avatar">
+                                <img src="assets/img/avt.jpg" alt="Image">
+                            </div>
+                            <div class="info">
+                                <span>Owned By</span>
+                                <h6> <a href="#">Ralph Garraway</a> </h6>
+                            </div>
+                        </div>
+                        <div class="price">
+                            <span>Current Bid</span>
+                            <h5> 4.89 ETH</h5>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-outline-secondary btn-block mt-3">Place A Bid</a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 mix fotos col-md-6 col-sm-6">
+                <div class="single-services">
+                    <div class="card-media">
+                        <a href="#"><img src="assets/img/card-item.jpg" alt="Image"></a>
+                    </div>
+                    <div class="card-title">
+                        <h5><a href="#">Rainbow Waterfall</a></h5>
+                    </div>
+                    <div class="meta-info">
+                        <div class="author">
+                            <div class="avatar">
+                                <img src="assets/img/avt.jpg" alt="Image">
+                            </div>
+                            <div class="info">
+                                <span>Owned By</span>
+                                <h6> <a href="#">Ralph Garraway</a> </h6>
+                            </div>
+                        </div>
+                        <div class="price">
+                            <span>Current Bid</span>
+                            <h5> 4.89 ETH</h5>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-outline-secondary btn-block mt-3">Place A Bid</a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 mix musica col-md-6 col-sm-6">
+                <div class="single-services">
+                    <div class="card-media">
+                        <a href="#"><img src="assets/img/card-item.jpg" alt="Image"></a>
+                    </div>
+                    <div class="card-title">
+                        <h5><a href="#">Manabu Painting</a></h5>
+                    </div>
+                    <div class="meta-info">
+                        <div class="author">
+                            <div class="avatar">
+                                <img src="assets/img/avt.jpg" alt="Image">
+                            </div>
+                            <div class="info">
+                                <span>Owned By</span>
+                                <h6> <a href="#">Ralph Garraway</a> </h6>
+                            </div>
+                        </div>
+                        <div class="price">
+                            <span>Current Bid</span>
+                            <h5> 4.89 ETH</h5>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-outline-secondary btn-block mt-3">Place A Bid</a>
+                </div>
+            </div>
+
+            <div class="col-lg-12" align="center">
+                <a href="#" class="btn btn-outline-secondary mt-3">Ver Mais</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- End NFTs Area -->
+
+<!-- NFTs Creators Area -->
+<section class="nft-creators-area ptb-100 bg-dark" style="padding-top:0;">
+    <div class="container">
+        <div class="section-title">
+            <h2>Top NFT Assets <span>Creators</span></h2>
+
+            <a href="#" class="read-more-btn">ver mais criadores</a>
+        </div>
+    </div>
+
+    <div class="container shorting">
+        <div class="row">
+            <div class="col-12">
+                <div class="heading-line s2"></div>
+            </div>
+            <div class="col-lg-4 mix arte col-md-6">
+                <div class="single-services">
+                    <div class="top-info">
+                        <div class="author">
+                            <div class="avatar">
+                                <img src="assets/img/avt.jpg" alt="Image">
+                                <div class="badge"><i class="ripple"></i></div>
+                            </div>
+                            <div class="info">
+                                <span><a href="author.html">Rodrigo Caggiano</a></span>
+                                <h6>@caggiano</h6>
+                            </div>
+                        </div>
+                        <div class="follow-box">
+                            <a href="#"><i class="fas fa-user-plus"></i> Follow</a>
+                        </div>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="bottom-info">
+                        <h5>Top NFT Collection</h5>
+                        <div class="bottom-media">
+                            <img src="assets/img/avt.jpg" alt="Image">
+                            <img src="assets/img/avt.jpg" alt="Image">
+                            <img src="assets/img/avt.jpg" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mix arte col-md-6">
+                <div class="single-services">
+                    <div class="top-info">
+                        <div class="author">
+                            <div class="avatar">
+                                <img src="assets/img/avt.jpg" alt="Image">
+                                <div class="badge"><i class="ripple"></i></div>
+                            </div>
+                            <div class="info">
+                                <span>Rodrigo Caggiano</span>
+                                <h6>@caggiano</h6>
+                            </div>
+                        </div>
+                        <div class="follow-box">
+                            <a href="#"><i class="fas fa-user-plus"></i> Follow</a>
+                        </div>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="bottom-info">
+                        <h5>Top NFT Collection</h5>
+                        <div class="bottom-media">
+                            <img src="assets/img/avt.jpg" alt="Image">
+                            <img src="assets/img/avt.jpg" alt="Image">
+                            <img src="assets/img/avt.jpg" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mix arte col-md-6">
+                <div class="single-services">
+                    <div class="top-info">
+                        <div class="author">
+                            <div class="avatar">
+                                <img src="assets/img/avt.jpg" alt="Image">
+                                <div class="badge"><i class="ripple"></i></div>
+                            </div>
+                            <div class="info">
+                                <span>Rodrigo Caggiano</span>
+                                <h6>@caggiano</h6>
+                            </div>
+                        </div>
+                        <div class="follow-box">
+                            <a href="#"><i class="fas fa-user-plus"></i> Follow</a>
+                        </div>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="bottom-info">
+                        <h5>Top NFT Collection</h5>
+                        <div class="bottom-media">
+                            <img src="assets/img/avt.jpg" alt="Image">
+                            <img src="assets/img/avt.jpg" alt="Image">
+                            <img src="assets/img/avt.jpg" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mix arte col-md-6">
+                <div class="single-services">
+                    <div class="top-info">
+                        <div class="author">
+                            <div class="avatar">
+                                <img src="assets/img/avt.jpg" alt="Image">
+                                <div class="badge"><i class="ripple"></i></div>
+                            </div>
+                            <div class="info">
+                                <span>Rodrigo Caggiano</span>
+                                <h6>@caggiano</h6>
+                            </div>
+                        </div>
+                        <div class="follow-box">
+                            <a href="#"><i class="fas fa-user-plus"></i> Follow</a>
+                        </div>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="bottom-info">
+                        <h5>Top NFT Collection</h5>
+                        <div class="bottom-media">
+                            <img src="assets/img/avt.jpg" alt="Image">
+                            <img src="assets/img/avt.jpg" alt="Image">
+                            <img src="assets/img/avt.jpg" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mix arte col-md-6">
+                <div class="single-services">
+                    <div class="top-info">
+                        <div class="author">
+                            <div class="avatar">
+                                <img src="assets/img/avt.jpg" alt="Image">
+                                <div class="badge"><i class="ripple"></i></div>
+                            </div>
+                            <div class="info">
+                                <span>Rodrigo Caggiano</span>
+                                <h6>@caggiano</h6>
+                            </div>
+                        </div>
+                        <div class="follow-box">
+                            <a href="#"><i class="fas fa-user-plus"></i> Follow</a>
+                        </div>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="bottom-info">
+                        <h5>Top NFT Collection</h5>
+                        <div class="bottom-media">
+                            <img src="assets/img/avt.jpg" alt="Image">
+                            <img src="assets/img/avt.jpg" alt="Image">
+                            <img src="assets/img/avt.jpg" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mix arte col-md-6">
+                <div class="single-services">
+                    <div class="top-info">
+                        <div class="author">
+                            <div class="avatar">
+                                <img src="assets/img/avt.jpg" alt="Image">
+                                <div class="badge"><i class="ripple"></i></div>
+                            </div>
+                            <div class="info">
+                                <span>Rodrigo Caggiano</span>
+                                <h6>@caggiano</h6>
+                            </div>
+                        </div>
+                        <div class="follow-box">
+                            <a href="#"><i class="fas fa-user-plus"></i> Follow</a>
+                        </div>
+                    </div>
+                    <div class="separator"></div>
+                    <div class="bottom-info">
+                        <h5>Top NFT Collection</h5>
+                        <div class="bottom-media">
+                            <img src="assets/img/avt.jpg" alt="Image">
+                            <img src="assets/img/avt.jpg" alt="Image">
+                            <img src="assets/img/avt.jpg" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- End NFTs Creators Area -->
+
+<!-- More Info -->
+<section class="more-info ptb-100 bg-dark" style="padding-top: 0; padding-bottom: 60px;">
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-12">
+                        <div class="hero-content">
+                            <h1>Let’s Join Now And Start Collect NFT Assets</h1>
+
+                            <p>Let's create your account now and start making transactions to buy or sell your nft assets more easily, safely and comfortably</p>
+                            <a href="#" class="btn btn-secondary">Create Yor Acount</a>
+                            <a href="#" class="btn btn-outline-secondary">About NFT<small>space</small></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="circle-pattern-4"></div>
+</section>
+<!-- End More Info -->
+
+<!-- Footer Area -->
+<?= $this->partial('nft/footer-mobiup'); ?>
+<!-- End Footer Area -->
+
+<div class="go-top"><i class="icofont-stylish-up"></i></div>
+
+<?= $this->partial('nft/footer'); ?>
+
+</body>
+</html>

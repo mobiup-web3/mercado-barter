@@ -1,0 +1,116 @@
+msgid "First page"
+msgstr "Primeira página"
+
+msgid "Previous"
+msgstr "Anterior"
+
+msgid "Next page"
+msgstr "Próxima"
+
+msgid "Last page"
+msgstr "Última página"
+
+msgid "Actions"
+msgstr "Ações"
+
+msgid "Some errors occurred."
+msgstr "Ocorreram alguns erros."
+
+msgid "Inactivate"
+msgstr "Inativar"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Save"
+msgstr "Gravar"
+
+msgid "Invalid id"
+msgstr "ID inválido"
+
+msgid "You must to specify the table gateway"
+msgstr "Você deve especificar o table gateway"
+
+msgid "You must to specify a valid table gateway"
+msgstr "Você deve especificar um table gateway válido"
+
+msgid "You must to specify the form"
+msgstr "Você deve especificar o form"
+
+msgid "You must to specify a valid form"
+msgstr "Você deve especificar um form válido"
+
+msgid "You must to specify the service"
+msgstr "Você deve especificar o serviço"
+
+msgid "You must to specify a valid service"
+msgstr "Você deve especificar um serviço válido"
+
+msgid "Register edited"
+msgstr "Registro editado"
+
+msgid "Could not edit register"
+msgstr "Não foi possível editar o registro"
+
+msgid "Register inactivated"
+msgstr "Registro inativado"
+
+msgid "Could not inactivate register"
+msgstr "Não foi possível inativar o registro"
+
+msgid "Add new"
+msgstr "Adicionar"
+
+msgid "List inactive"
+msgstr "Listar inativos"
+
+msgid "Could not activate register"
+msgstr "Não foi possível ativar o registro"
+
+msgid "Register activated"
+msgstr "Registro ativado"
+
+msgid "Are you sure you want to activate %s?"
+msgstr "Tem certeza que deseja ativar %s?"
+
+msgid "Activate"
+msgstr "Ativar"
+
+msgid "Could not add register"
+msgstr "Não foi possível adicionar o registro"
+
+msgid "Register added"
+msgstr "Registro adicionado"
+
+msgid "Error: "
+msgstr "Erro: "
+
+msgid "Administration"
+msgstr "Administração"
+
+msgid "Navigation"
+msgstr "Navegação"
+
+msgid "Welcome"
+msgstr "Bem vindo(a)"
+
+msgid "My account"
+msgstr "Minha conta"
+
+msgid "Settings"
+msgstr "Definições"
+
+msgid "Search"
+msgstr "Buscar"
+
+msgid "Close"
+msgstr "Fechar"
+
+msgid "Save changes"
+msgstr "Gravar alterações"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "File has an incorrect extension"
+msgstr "Arquivo com extensão não permitida"

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="true">
+    <testsuites>
+        <testsuite name="Acl Test Suite">
+            <directory>./module/Acl/test</directory>
+        </testsuite>
+        <testsuite name="ZendSkeletonApplication Test Suite">
+            <directory>./module/Application/test</directory>
+        </testsuite>
+        <testsuite name="Client Test Suite">
+            <directory>./module/Client/test</directory>
+        </testsuite>
+        <testsuite name="GranitoPOS Test Suite">
+            <directory>./module/GranitoPOS/test</directory>
+        </testsuite>
+        <testsuite name="GranitoPayment Test Suite">
+            <directory>./module/GranitoPayment/test</directory>
+        </testsuite>
+        <testsuite name="SR API Test Suite">
+            <directory>./module/SRApi/test</directory>
+        </testsuite>
+        <testsuite name="User Test Suite">
+            <directory>./module/User/test</directory>
+        </testsuite>
+        <testsuite name="Getnet Test Suite">
+            <directory>./module/Getnet/test</directory>
+        </testsuite>
+        <testsuite name="SAP Test Suite">
+            <directory>./module/SAP/test</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./module/Acl/src</directory>
+            <directory suffix=".php">./module/Application/src</directory>
+            <directory suffix=".php">./module/Client/src</directory>
+            <directory suffix=".php">./module/GranitoPOS/src</directory>
+            <directory suffix=".php">./module/GranitoPayment/src</directory>
+            <directory suffix=".php">./module/SRApi/src</directory>
+            <directory suffix=".php">./module/User/src</directory>
+            <directory suffix=".php">./module/Getnet/lib</directory>
+            <directory suffix=".php">./module/SAP/src</directory>
+        </whitelist>
+    </filter>
+<!--    <logging>-->
+<!--        <log type="coverage-html" target="./build/coverage-html" lowUpperBound="35" highLowerBound="75"/>-->
+<!--    </logging>-->
+    <groups>
+        <include>
+            <group>S3</group>
+        </include>
+<!--        <exclude>-->
+<!--            <group>Functional</group>-->
+<!--            <group>FTP</group>-->
+<!--        </exclude>-->
+    </groups>
+</phpunit>

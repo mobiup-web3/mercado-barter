@@ -1,0 +1,10 @@
+<?php
+return [
+    'base_url' => 'https://svm.mobiup.io',
+    'payment_base_url' => 'https://svm.mobiup.io',
+    'email_contato' => 'erick.queiroz@mobiup.com.br',
+    'env' => 'dev',
+    'api_node' => [
+        'url' => ''
+    ],
+];

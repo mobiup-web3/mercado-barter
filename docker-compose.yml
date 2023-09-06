@@ -1,0 +1,7 @@
+mobiup-redis-gs:
+  container_name: mobiup-redis-gs
+  image: redis:latest
+  ports:
+    - "9979:6379"
+  environment:
+    ALLOW_EMPTY_PASSWORD: 'yes'
