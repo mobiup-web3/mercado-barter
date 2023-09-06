@@ -1,3 +1,4 @@
+import Navbar from './components/Navbar';
 import { Container } from './appStyles';
 import { AppProvider } from './context/AppContext';
 import { RoutesApp } from './routes';
