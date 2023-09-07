@@ -13,7 +13,7 @@ export const Container = styled.div`
     }
 
     @media(min-width: 767px){
-        .h-logo{
+        .h-logo img{
             width: 320px;
         }
     }

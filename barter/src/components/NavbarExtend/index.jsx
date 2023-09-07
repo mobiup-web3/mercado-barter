@@ -19,7 +19,7 @@ const NavbarExtend = () => {
                 </div>
               </div>
               <div className="col-auto col-lg-4">
-                <div className="h-content-second">
+                <div className="h-content-second text-end">
                   <div className="dropdown">
                     <i className="bi bi-gear-fill fs-3 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                     <ul className="dropdown-menu">
