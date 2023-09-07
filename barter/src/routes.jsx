@@ -1,18 +1,21 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { Home } from './pages/Home';
-import { Profile } from './pages/Profile';
+import { Marketplace } from './pages/Marketplace';
 import { Onboarding } from './pages/Onboarding';
-import { Validate } from './pages/Validate';
+import { Register } from './pages/Register';
+import { Item } from './pages/Item';
+import { Error404 } from './pages/Error404';
 
 export const RoutesApp = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="onboarding" element={<Onboarding />} />
-      <Route path="validate" element={<Validate />} />
-      <Route path="account" element={<Profile />} />
-      <Route path="*" element={<h1>ERRO 404</h1>} />
+      <Route path="register" element={<Register />} />
+      <Route path="p/:profile" element={<Marketplace />} />
+      <Route path="item/:item" element={<Item />} />
+      <Route path="*" element={<Error404 />} />
     </Routes>
   );
 };

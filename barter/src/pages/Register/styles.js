@@ -11,9 +11,8 @@ export const Container = styled.div`
     }
 
     .o-navigation{
-        border-radius: 16px;
-        background-color: #f0f0f0;
-        padding: 40px 16px;
+        border-radius: 12px;
+        padding: 20px 16px;
     }
 
     .o-navigation li{
