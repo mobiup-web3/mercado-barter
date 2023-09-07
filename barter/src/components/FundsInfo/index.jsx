@@ -2,7 +2,7 @@ import { Container } from './styles';
 
 const FundsInfo = () => {
   return (
-    <Container class>
+    <Container>
         <div className="container">
           <div className="f-card card py-4 px-3 p-4">
             <div className="row justify-content-between mb-3">

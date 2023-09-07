@@ -13,7 +13,6 @@ export const Marketplace = () => {
 
   useEffect(() => {
     if (!expectedProfiles.includes(profile)) {
-      console.log('Valor de profile:', profile);
       navigate('/404');
     }
   }, [profile, navigate]);
