@@ -9,6 +9,8 @@ export const Container = styled.div`
     background: var(--m-bg);
     font-family: 'Inter', sans-serif;
 
+    min-height: 100vh;
+
     // resets
     ul{
         padding: 0;

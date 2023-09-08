@@ -1,5 +1,3 @@
-import Navbar from './components/Navbar';
-import { Container } from './appStyles';
 import { AppProvider } from './context/AppContext';
 import { RoutesApp } from './routes';
 
@@ -28,9 +26,7 @@ function App() {
   return (
     <WagmiConfig config={wagmiConfig}>
       <AppProvider>
-        <Container>
-          <RoutesApp />
-        </Container>
+        <RoutesApp />
       </AppProvider>
       <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
     </WagmiConfig>
