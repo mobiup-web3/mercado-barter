@@ -22,11 +22,11 @@ const BarterTabs = () => {
         </div>
       </Container>
       <TabsContent>
-        <div className="m-tabs-content card rounded-0 mt-3">
+        <div className="m-tabs-content caR$ rounded-0 mt-3">
             <div className="tab-content" id="nav-tabContent">
                 <div className="tab-pane fade" id="list-one-barter" role="tabpanel" aria-labelledby="list-home-list">
 
-                  <div class="container">
+                  <div className="container">
                     <div className="row">
                       <div className="col-12 col-md-3 col-lg-4">
                         <div onClick={() => handleItem('eclipse-cross-hipe')} className="m-tabs-item py-3 d-flex align-items-start gap-3">
@@ -36,23 +36,18 @@ const BarterTabs = () => {
                           </div>
                           <div className="m-tabs-item-info">
                             <h4 className="m-tabs-item-title mb-3 text-uppercase fw-bold">Eclipse Cross Hipe</h4>
-                            <div className="m-tabs-item-value mb-3"><span>R$ 210.990,00</span></div>
-                            <div className="m-tabs-item-cripto">
-                              <div className="m-tabs-item-cripto-value d-flex align-items-center gap-2 mb-2">
-                                <div className="d-flex align-items-center gap-2">
-                                  <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="22" alt="" />
-                                  CPRCOFEE01
-                                </div>
-                                <span>959,045455</span>
-                              </div>
+                            <div className="m-tabs-item-cripto mb-3">
                               <div className="m-tabs-item-cripto-value d-flex align-items-center gap-2">
                                 <div className="d-flex align-items-center gap-2">
-                                  <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="22" alt="" />
-                                  CPRMIL01
+                                  <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="32" alt="" />
                                 </div>
-                                <span>959,045455</span>
+                                <div className='d-flex flex-column'>
+                                  <span className="text-muted fw-semibold">CPRMIL01</span>
+                                  <span class="fs-6">959.045455</span>
+                                </div>
                               </div>
                             </div>
+                            <div className="m-tabs-item-value"><small className="fw-semibold text-muted">Valor convertido para real digital</small><p className='m-0'>R$ 210.990,00</p></div>
                           </div>
                         </div> {/* veiculo 1 ends here */}
                       </div>
@@ -67,23 +62,18 @@ const BarterTabs = () => {
                           </div>
                           <div className="m-tabs-item-info">
                             <h4 className="m-tabs-item-title mb-3 text-uppercase fw-bold">Eclipse Cross Hipe</h4>
-                            <div className="m-tabs-item-value mb-3"><span>R$ 210.990,00</span></div>
-                            <div className="m-tabs-item-cripto">
-                              <div className="m-tabs-item-cripto-value d-flex align-items-center gap-2 mb-2">
-                                <div className="d-flex align-items-center gap-2">
-                                  <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="22" alt="" />
-                                  CPRCOFEE01
-                                </div>
-                                <span>959,045455</span>
-                              </div>
+                            <div className="m-tabs-item-cripto mb-3">
                               <div className="m-tabs-item-cripto-value d-flex align-items-center gap-2">
                                 <div className="d-flex align-items-center gap-2">
-                                  <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="22" alt="" />
-                                  CPRMIL01
+                                  <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="32" alt="" />
                                 </div>
-                                <span>959,045455</span>
+                                <div className='d-flex flex-column'>
+                                  <span className="text-muted fw-semibold">CPRMIL01</span>
+                                  <span class="fs-6">959.045455</span>
+                                </div>
                               </div>
                             </div>
+                            <div className="m-tabs-item-value"><small className="fw-semibold text-muted">Valor convertido para real digital</small><p className='m-0'>R$ 210.990,00</p></div>
                           </div>
                         </div> {/* veiculo 1 ends here */}
                       </div>
@@ -95,7 +85,7 @@ const BarterTabs = () => {
                 </div>
                 <div className="tab-pane fade show active" id="list-two-barter" role="tabpanel" aria-labelledby="list-profile-list">
                   
-                  <div class="container">
+                  <div className="container">
                     <div className="row">
                       <div className="col-12 col-md-3 col-lg-4">
                         <div onClick={() => handleItem('rootex-fertilizante')} className="m-tabs-item py-3 d-flex align-items-start gap-3">
@@ -105,23 +95,18 @@ const BarterTabs = () => {
                           </div>
                           <div className="m-tabs-item-info">
                             <h4 className="m-tabs-item-title mb-3 text-uppercase fw-bold">Rootex Fertilizante</h4>
-                            <div className="m-tabs-item-value mb-3"><span>R$ 210.990,00</span></div>
-                            <div className="m-tabs-item-cripto">
-                              <div className="m-tabs-item-cripto-value d-flex align-items-center gap-2 mb-2">
-                                <div className="d-flex align-items-center gap-2">
-                                  <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="22" alt="" />
-                                  COFFBR
-                                </div>
-                                <span>959,045455</span>
-                              </div>
+                            <div className="m-tabs-item-cripto mb-3">
                               <div className="m-tabs-item-cripto-value d-flex align-items-center gap-2">
                                 <div className="d-flex align-items-center gap-2">
-                                  <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="22" alt="" />
-                                  COFFBR
+                                  <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="32" alt="" />
                                 </div>
-                                <span>959,045455</span>
+                                <div className='d-flex flex-column'>
+                                  <span className="text-muted fw-semibold">CPRMIL01</span>
+                                  <span class="fs-6">15.045</span>
+                                </div>
                               </div>
                             </div>
+                            <div className="m-tabs-item-value"><small className="fw-semibold text-muted">Valor convertido para real digital</small><p className='m-0'>R$ 2.708,10</p></div>
                           </div>
                         </div> {/* item 1 ends here */}
                       </div>
@@ -136,25 +121,20 @@ const BarterTabs = () => {
                           </div>
                           <div className="m-tabs-item-info">
                             <h4 className="m-tabs-item-title mb-3 text-uppercase fw-bold">Rootex Fertilizante</h4>
-                            <div className="m-tabs-item-value mb-3"><span>R$ 210.990,00</span></div>
-                            <div className="m-tabs-item-cripto">
-                              <div className="m-tabs-item-cripto-value d-flex align-items-center gap-2 mb-2">
-                                <div className="d-flex align-items-center gap-2">
-                                  <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="22" alt="" />
-                                  COFFBR
-                                </div>
-                                <span>959,045455</span>
-                              </div>
+                            <div className="m-tabs-item-cripto mb-3">
                               <div className="m-tabs-item-cripto-value d-flex align-items-center gap-2">
                                 <div className="d-flex align-items-center gap-2">
-                                  <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="22" alt="" />
-                                  COFFBR
+                                  <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="32" alt="" />
                                 </div>
-                                <span>959,045455</span>
+                                <div className='d-flex flex-column'>
+                                  <span className="text-muted fw-semibold">CPRMIL01</span>
+                                  <span class="fs-6">15.045</span>
+                                </div>
                               </div>
                             </div>
+                            <div className="m-tabs-item-value"><small className="fw-semibold text-muted">Valor convertido para real digital</small><p className='m-0'>R$ 2.708,10</p></div>
                           </div>
-                        </div> {/* item 2 ends here */}
+                        </div> {/* item 1 ends here */}
                       </div>
                     </div>
                   </div>

@@ -5,12 +5,15 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
         margin-bottom: 1.5rem;
+        max-height: 180px;
+        justify-content: center;
     }
 
     .i-media img{
         object-fit: cover;
         object-position: center;
         height: 100%;
+        max-height: 180px;
     }
 
     .i-value-cripto > div{

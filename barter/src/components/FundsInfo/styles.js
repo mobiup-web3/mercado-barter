@@ -6,4 +6,8 @@ export const Container = styled.nav`
     small{
         font-size: 60% !important;
     }
+
+    .funds-cpr .f-initial-info{
+        font-size: 13px;
+    }
 `;

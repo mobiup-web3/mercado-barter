@@ -28,7 +28,7 @@ const findDataByParam = (param) => {
         { currency: 'cprcofee01', price: '959,0477' },
         { currency: 'cprmil01', price: '229,045' },
       ],
-      image: 'https://cdn.motor1.com/images/mgl/3WWyL6/s1/mitsubishi-eclipse-cross-hpe-s-awc-2023.jpg',
+      image: 'https://http2.mlstatic.com/D_NQ_NP_970839-MLU69446511865_052023-O.webp',
     }
   ];
 
