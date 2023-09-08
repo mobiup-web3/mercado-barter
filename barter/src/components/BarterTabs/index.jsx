@@ -13,8 +13,8 @@ const BarterTabs = () => {
       <Container className="container">
         <div className="m-tabs-menu">
             <div className="list-group list-group-horizontal" id="list-tab-barter" role="tablist">
-                <a className="list-group-item list-group-item-action active" id="list-one-list" data-bs-toggle="list" href="#list-one-barter" role="tab" aria-controls="list-home">Veículos</a>
-                <a className="list-group-item list-group-item-action" id="list-two-list-barter" data-bs-toggle="list" href="#list-two-barter" role="tab" aria-controls="list-profile">Fertilizantes</a>
+                <a className="list-group-item list-group-item-action" id="list-one-list" data-bs-toggle="list" href="#list-one-barter" role="tab" aria-controls="list-home">Veículos</a>
+                <a className="list-group-item list-group-item-action active" id="list-two-list-barter" data-bs-toggle="list" href="#list-two-barter" role="tab" aria-controls="list-profile">Fertilizantes</a>
                 <a className="list-group-item list-group-item-action" id="list-three-list-barter" data-bs-toggle="list" href="#list-three-barter" role="tab" aria-controls="list-messages">Fertilizantes</a>
                 <a className="list-group-item list-group-item-action" id="list-four-list-barter" data-bs-toggle="list" href="#list-four-barter" role="tab" aria-controls="list-messages">Fertilizantes</a>
                 <a className="list-group-item list-group-item-action" id="list-five-list-barter" data-bs-toggle="list" href="#list-five-barter" role="tab" aria-controls="list-messages">Fertilizantes</a>
@@ -24,7 +24,7 @@ const BarterTabs = () => {
       <TabsContent>
         <div className="m-tabs-content card rounded-0 mt-3">
             <div className="tab-content" id="nav-tabContent">
-                <div className="tab-pane fade show active" id="list-one-barter" role="tabpanel" aria-labelledby="list-home-list">
+                <div className="tab-pane fade" id="list-one-barter" role="tabpanel" aria-labelledby="list-home-list">
 
                   <div class="container">
                     <div className="row">
@@ -93,7 +93,7 @@ const BarterTabs = () => {
                   </div>
 
                 </div>
-                <div className="tab-pane fade" id="list-two-barter" role="tabpanel" aria-labelledby="list-profile-list">
+                <div className="tab-pane fade show active" id="list-two-barter" role="tabpanel" aria-labelledby="list-profile-list">
                   
                   <div class="container">
                     <div className="row">

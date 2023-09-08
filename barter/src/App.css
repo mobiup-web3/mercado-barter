@@ -30,9 +30,24 @@ ul{
 }
 .btn-default:hover{
     background-color: var(--m-default-color-hover);
+    color: #fff;
 }
 .btn-default:focus,
 .btn-default:active{
+    background-color: var(--m-default-color) !important;
+    color: #fff !important;
+}
+.btn-default-transparent{
+    color: var(--m-default-color);
+    border: 1px solid var(--m-default-color);
+    background-color: transparent;
+}
+.btn-default-transparent:hover{
+    background-color: var(--m-default-color);
+    color: #fff;
+}
+.btn-default-transparent:focus,
+.btn-default-transparent:active{
     background-color: var(--m-default-color) !important;
     color: #fff !important;
 }
@@ -92,4 +107,11 @@ ul{
 .css-t3ipsp-control{
     border-color: #86b7fe !important;
     box-shadow: none !important;
+}
+
+.i-resume-checkout{
+    border-radius: 8px;
+    padding: 8px 10px;
+    background-color: rgba(0,0,0,.05);
+    /* // backdrop-filter: blur(8px); */
 }

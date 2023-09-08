@@ -5,6 +5,7 @@ import { Marketplace } from './pages/Marketplace';
 import { Onboarding } from './pages/Onboarding';
 import { Register } from './pages/Register';
 import { Item } from './pages/Item';
+import { ApproveOffer } from './pages/ApproveOffer';
 import { Error404 } from './pages/Error404';
 
 export const RoutesApp = () => {
@@ -15,6 +16,7 @@ export const RoutesApp = () => {
       <Route path="register" element={<Register />} />
       <Route path="p/:profile" element={<Marketplace />} />
       <Route path="item/:item" element={<Item />} />
+      <Route path="approve-offer/:item" element={<ApproveOffer />} />
       <Route path="*" element={<Error404 />} />
     </Routes>
   );
