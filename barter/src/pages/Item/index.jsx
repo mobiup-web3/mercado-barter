@@ -15,7 +15,7 @@ const findDataByParam = (param) => {
       value: 'R$ 210.990,00',
       creator: 'Concessionária XYZ',
       cryptoValue: [
-        { currency: 'cprcofee01', price: '959,0477' },
+        { currency: 'rd', price: '210990.50' },
         { currency: 'cprmil01', price: '229,045' },
       ],
       image: 'https://cdn.motor1.com/images/mgl/3WWyL6/s1/mitsubishi-eclipse-cross-hpe-s-awc-2023.jpg',
@@ -27,7 +27,7 @@ const findDataByParam = (param) => {
       value: 'R$ 2.708,10',
       creator: 'Rootex',
       cryptoValue: [
-        { currency: 'cprcofee01', price: '59.0477' },
+        { currency: 'rd', price: '2708.10' },
         { currency: 'cprmil01', price: '15.045' },
       ],
       image: 'https://http2.mlstatic.com/D_NQ_NP_970839-MLU69446511865_052023-O.webp',
@@ -39,7 +39,7 @@ const findDataByParam = (param) => {
 
 // custom select start 
 const options = [
-  { value: 'CPRCOFEE01', label: 'CPRCOFEE01', icon: 'https://stonoex.mobiup.io/assets/img/cofbr.svg' },
+  // { value: 'RD', label: 'RD', icon: 'https://stonoex.mobiup.io/assets/img/cofbr.svg' },
   { value: 'CPRMIL01', label: 'CPRMIL01', icon: 'https://stonoex.mobiup.io/assets/img/cofbr.svg' },
 ];
 
@@ -208,15 +208,15 @@ export const Item = () => {
                         <div className="d-flex align-items-center gap-2">
                           <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="36" alt="" />
                           <div>
-                            <small className="text-muted fw-semibold">Preço CPRCOFEE01</small>
-                            <p className="fw-bold">{itemData.cryptoValue.find(entry => entry.currency === 'cprcofee01').price}</p>
+                            <small className="text-muted fw-semibold">Preço CPRMIL01</small>
+                            <p className="fw-bold">{itemData.cryptoValue.find(entry => entry.currency === 'cprmil01').price}</p>
                           </div>
                         </div>
                         <div className="d-flex align-items-center gap-2">
                           <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="36" alt="" />
                           <div>
-                            <small className="text-muted fw-semibold">Preço CPRMIL01</small>
-                            <p className="fw-bold">{itemData.cryptoValue.find(entry => entry.currency === 'cprmil01').price}</p>
+                            <small className="text-muted fw-semibold">Preço RD</small>
+                            <p className="fw-bold">{itemData.cryptoValue.find(entry => entry.currency === 'rd').price}</p>
                           </div>
                         </div>
                       </div>
