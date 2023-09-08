@@ -1,20 +1,45 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    .h-logo img{
-        width: 100%;
-        border-radius: 16px;
+    .i-media{
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
     }
 
-    @media(min-width: 767px){
-        .h-logo{
-            width: 320px;
-        }
+    .i-media img{
+        object-fit: cover;
+        object-position: center;
+        height: 100%;
+    }
+
+    .i-value-cripto > div{
+        background-color: rgba(0,0,0,.03);
+        border-radius: 12px;
+        padding: 8px;
+        flex: 1;
+    }
+
+    .i-value-cripto p{
+        margin: 0;
+        font-size: 16px;
+    }
+    
+    .i-value-cripto small{
+        font-size: 65%;
+    }
+
+    .i-button{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background-color: #fff;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-top: 1px solid rgba(0,0,0,0.05);
+        
+        // min-height: 70px;
     }
 `;

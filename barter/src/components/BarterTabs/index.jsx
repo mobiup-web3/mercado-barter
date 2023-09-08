@@ -41,14 +41,14 @@ const BarterTabs = () => {
                               <div className="m-tabs-item-cripto-value d-flex align-items-center gap-2 mb-2">
                                 <div className="d-flex align-items-center gap-2">
                                   <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="22" alt="" />
-                                  COFFBR
+                                  CPRCOFEE01
                                 </div>
                                 <span>959,045455</span>
                               </div>
                               <div className="m-tabs-item-cripto-value d-flex align-items-center gap-2">
                                 <div className="d-flex align-items-center gap-2">
                                   <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="22" alt="" />
-                                  COFFBR
+                                  CPRMIL01
                                 </div>
                                 <span>959,045455</span>
                               </div>
@@ -72,14 +72,14 @@ const BarterTabs = () => {
                               <div className="m-tabs-item-cripto-value d-flex align-items-center gap-2 mb-2">
                                 <div className="d-flex align-items-center gap-2">
                                   <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="22" alt="" />
-                                  COFFBR
+                                  CPRCOFEE01
                                 </div>
                                 <span>959,045455</span>
                               </div>
                               <div className="m-tabs-item-cripto-value d-flex align-items-center gap-2">
                                 <div className="d-flex align-items-center gap-2">
                                   <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="22" alt="" />
-                                  COFFBR
+                                  CPRMIL01
                                 </div>
                                 <span>959,045455</span>
                               </div>
