@@ -14,8 +14,8 @@ const findDataByParam = (param) => {
       description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rem magnam adipisci non delectus culpa quo autem, at eos officiis tempora cupiditate consequuntur itaque magni!',
       value: 'R$ 210.990,00',
       cryptoValue: [
-        { currency: 'cofbr', price: '959,0477' },
-        { currency: 'milbr', price: '229,045' },
+        { currency: 'cprcofee01', price: '959,0477' },
+        { currency: 'cprmil01', price: '229,045' },
       ],
       image: 'https://cdn.motor1.com/images/mgl/3WWyL6/s1/mitsubishi-eclipse-cross-hpe-s-awc-2023.jpg',
     },
@@ -25,8 +25,8 @@ const findDataByParam = (param) => {
       description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rem magnam adipisci non delectus culpa quo autem, at eos officiis tempora cupiditate consequuntur itaque magni!',
       value: 'R$ 5555,00',
       cryptoValue: [
-        { currency: 'cofbr', price: '959,0477' },
-        { currency: 'milbr', price: '229,045' },
+        { currency: 'cprcofee01', price: '959,0477' },
+        { currency: 'cprmil01', price: '229,045' },
       ],
       image: 'https://cdn.motor1.com/images/mgl/3WWyL6/s1/mitsubishi-eclipse-cross-hpe-s-awc-2023.jpg',
     }
@@ -37,8 +37,8 @@ const findDataByParam = (param) => {
 
 // custom select start 
 const options = [
-  { value: 'COFBR', label: 'COFBR', icon: 'https://stonoex.mobiup.io/assets/img/cofbr.svg' },
-  { value: 'MILBR', label: 'MILBR', icon: 'https://stonoex.mobiup.io/assets/img/cofbr.svg' },
+  { value: 'CPRCOFEE01', label: 'CPRCOFEE01', icon: 'https://stonoex.mobiup.io/assets/img/cofbr.svg' },
+  { value: 'CPRMIL01', label: 'CPRMIL01', icon: 'https://stonoex.mobiup.io/assets/img/cofbr.svg' },
 ];
 
 const customStyles = {
@@ -206,15 +206,15 @@ export const Item = () => {
                         <div className="d-flex align-items-center gap-2">
                           <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="36" alt="" />
                           <div>
-                            <small className="text-muted fw-semibold">Preço COFBR</small>
-                            <p className="fw-bold">{itemData.cryptoValue.find(entry => entry.currency === 'cofbr').price}</p>
+                            <small className="text-muted fw-semibold">Preço CPRCOFEE01</small>
+                            <p className="fw-bold">{itemData.cryptoValue.find(entry => entry.currency === 'cprcofee01').price}</p>
                           </div>
                         </div>
                         <div className="d-flex align-items-center gap-2">
                           <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="36" alt="" />
                           <div>
-                            <small className="text-muted fw-semibold">Preço MILBR</small>
-                            <p className="fw-bold">{itemData.cryptoValue.find(entry => entry.currency === 'milbr').price}</p>
+                            <small className="text-muted fw-semibold">Preço CPRMIL01</small>
+                            <p className="fw-bold">{itemData.cryptoValue.find(entry => entry.currency === 'cprmil01').price}</p>
                           </div>
                         </div>
                       </div>
