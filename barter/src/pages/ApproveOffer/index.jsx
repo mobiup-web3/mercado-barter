@@ -13,8 +13,9 @@ const findDataByParam = (param) => {
       name: 'Eclipse Cross Hipe',
       description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rem magnam adipisci non delectus culpa quo autem, at eos officiis tempora cupiditate consequuntur itaque magni!',
       value: 'R$ 210.990,00',
+      creator: 'Concessionária XYZ',
       cryptoValue: [
-        { currency: 'cprcofee01', price: '959,0477' },
+        { currency: 'rd', price: '210990.50' },
         { currency: 'cprmil01', price: '229,045' },
       ],
       image: 'https://cdn.motor1.com/images/mgl/3WWyL6/s1/mitsubishi-eclipse-cross-hpe-s-awc-2023.jpg',
@@ -23,10 +24,11 @@ const findDataByParam = (param) => {
       param: 'rootex-fertilizante',
       name: 'Rootex Fertilizante',
       description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rem magnam adipisci non delectus culpa quo autem, at eos officiis tempora cupiditate consequuntur itaque magni!',
-      value: 'R$ 5555,00',
+      value: 'R$ 2.708,10',
+      creator: 'Rootex',
       cryptoValue: [
-        { currency: 'cprcofee01', price: '959,0477' },
-        { currency: 'cprmil01', price: '229,045' },
+        { currency: 'rd', price: '2708.10' },
+        { currency: 'cprmil01', price: '15.045' },
       ],
       image: 'https://http2.mlstatic.com/D_NQ_NP_970839-MLU69446511865_052023-O.webp',
     }
@@ -37,7 +39,7 @@ const findDataByParam = (param) => {
 
 // custom select start 
 const options = [
-  { value: 'CPRCOFEE01', label: 'CPRCOFEE01', icon: 'https://stonoex.mobiup.io/assets/img/cofbr.svg' },
+  // { value: 'CPRCOFEE01', label: 'CPRCOFEE01', icon: 'https://stonoex.mobiup.io/assets/img/cofbr.svg' },
   { value: 'CPRMIL01', label: 'CPRMIL01', icon: 'https://stonoex.mobiup.io/assets/img/cofbr.svg' },
 ];
 
@@ -206,17 +208,18 @@ export const ApproveOffer = () => {
                         <div className="d-flex align-items-center gap-2">
                           <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="36" alt="" />
                           <div>
-                            <small className="text-muted fw-semibold">Preço CPRCOFEE01</small>
-                            <p className="fw-bold">{itemData.cryptoValue.find(entry => entry.currency === 'cprcofee01').price}</p>
+                            <small className="text-muted fw-semibold">Preço CPRMIL01</small>
+                            <p className="fw-bold">{itemData.cryptoValue.find(entry => entry.currency === 'cprmil01').price}</p>
                           </div>
                         </div>
                         <div className="d-flex align-items-center gap-2">
                           <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="36" alt="" />
                           <div>
-                            <small className="text-muted fw-semibold">Preço CPRMIL01</small>
-                            <p className="fw-bold">{itemData.cryptoValue.find(entry => entry.currency === 'cprmil01').price}</p>
+                            <small className="text-muted fw-semibold">Preço RD</small>
+                            <p className="fw-bold">{itemData.cryptoValue.find(entry => entry.currency === 'rd').price}</p>
                           </div>
                         </div>
+                        
                       </div>
                     </div>
                     <div className="i-offer-info mt-4">
@@ -230,7 +233,7 @@ export const ApproveOffer = () => {
                           </div>
                         </div>
                         <div class="i-offer-info-value text-end">
-                          <span>959.0477 CPRCOFEE01</span>
+                          <span>15.045 CPRMIL01</span>
                         </div>
                       </div>
                       <div className="i-offer-info-box d-flex align-items-center justify-content-between mt-3">
@@ -242,7 +245,7 @@ export const ApproveOffer = () => {
                           </div>
                         </div>
                         <div class="i-offer-info-value text-end">
-                          <span>959.0477 CPRCOFEE01</span>
+                          <span>15.045 CPRMIL01</span>
                         </div>
                       </div>
                       
@@ -287,7 +290,7 @@ export const ApproveOffer = () => {
               <span class="fw-semibold">{itemData.name}</span>
               <div class="small d-flex align-items-center gap-2 text-muted fw-semibold">
                 <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="22" alt="" /> 
-                959.0477 CPRCOFEE01
+                15.045 CPRMIL01
               </div>
             </div>
           </div>
