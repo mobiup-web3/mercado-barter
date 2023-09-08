@@ -36,9 +36,8 @@ export const Marketplace = () => {
                         <div className="col-lg-12">
                             <div className="m-tabs-menu">
                                 <div className="list-group list-group-horizontal" id="list-tab" role="tablist">
-                                    <a className="list-group-item list-group-item-action disabled" aria-disabled="true" id="list-one-list" data-bs-toggle="list" href="#list-one" role="tab" aria-controls="list-home">Compra e Venda</a>
-                                    <a className="list-group-item list-group-item-action active" id="list-two-list" data-bs-toggle="list" href="#list-two" role="tab" aria-controls="list-profile">Mercado Barter</a>
-                                    <a className="list-group-item list-group-item-action disabled" aria-disabled="true" id="list-three-list" data-bs-toggle="list" href="#list-three" role="tab" aria-controls="list-messages">Status das Transações</a>
+                                    <a className="list-group-item list-group-item-action disabled" aria-disabled="true" id="list-two-list" data-bs-toggle="list" href="#list-two" role="tab" aria-controls="list-profile">Status das Transações</a>
+                                    <a className="list-group-item list-group-item-action active" id="list-one-list" data-bs-toggle="list" href="#list-one" role="tab" aria-controls="list-home">Mercado<br />Barter</a>
                                 </div>
                             </div>
                         </div>

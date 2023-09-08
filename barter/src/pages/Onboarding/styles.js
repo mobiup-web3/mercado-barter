@@ -16,7 +16,7 @@ export const Container = styled.div`
         padding: 20px 16px;
     }
 
-    .o-navigation li{
+    .o-navigation li label{
         display: flex;
         justify-content: space-between;
         align-items: center;

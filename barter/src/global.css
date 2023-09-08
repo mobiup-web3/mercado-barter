@@ -8,7 +8,12 @@
 body{
   font-family: 'Inter', sans-serif;
 }
-
+#root{
+  min-height: 100vh;
+}
+#root > :is(div,section){
+  overflow: hidden;
+}
 /* p{
   margin: 0;
 } */

@@ -120,7 +120,7 @@ const FundsInfo = ({ profile }) => {
                           <i className='bi bi-info-circle-fill ms-1'></i>
                         </GenericTooltip>
                       </small>
-                      <p className="fs-4 fw-bold m-0">14.000</p>
+                      <p className="fs-4 fw-bold m-0">14.000 CPRMIL01</p>
                     </div>
                     <div>
                       <small className="text-muted fw-semibold">
@@ -141,26 +141,6 @@ const FundsInfo = ({ profile }) => {
                         data={data} 
                         options={options}
                       />
-                    </div>
-                  </div>
-                </div>
-                <div className="row align-items-center">
-                  <div className="col-auto mt-3 mt-md-0">
-                    <div className="d-flex align-items-start gap-2">
-                      <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="28" alt="" />
-                      <div className="d-flex flex-column">
-                        <span className="fw-bold small">CPRCOFEE01 <sup className="bi bi-arrow-down-circle text-danger"></sup></span>
-                        <small className="fw-semibold text-muted">R$ 1 <i className="bi bi-chevron-right small"></i> 0.33 CPRCOFEE01</small> 
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-auto mt-3 mt-md-0">
-                    <div className="d-flex align-items-start gap-2">
-                      <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="28" alt="" />
-                      <div className="d-flex flex-column">
-                        <span className="fw-bold small">CPRMIL01 <sup className="bi bi-arrow-up-circle text-success"></sup></span>
-                        <small className="fw-semibold text-muted">R$ 1 <i className="bi bi-chevron-right small"></i> 0.18 CPRMIL01</small> 
-                      </div>
                     </div>
                   </div>
                 </div>
