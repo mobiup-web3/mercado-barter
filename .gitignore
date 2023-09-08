@@ -54,3 +54,4 @@ config/autoload/local.php
 config/autoload/bringg.global.php
 public/files/*
 !public/files/.gitkeep
+barter/node_modules
