@@ -1,21 +1,49 @@
-import { TabsContent } from './styles';
+import React, { useState } from "react";
+import { TabsContent } from "./styles";
 import { useNavigate } from "react-router-dom";
+import GenericModal from "../GenericModal";
+import copyToClipboard from '../../utils/clipboard.js';
+
 
 const CPRTabs = () => {
   const navigate = useNavigate();
+  const [icon, setIcon] = useState('bi bi-clipboard');
+  const [copyMessage, setCopyMessage] = useState('');
 
   const handleItem = (param) => {
     navigate('/item/' + param);
   }
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+    setShow(false);
+  }
+
+  const handleShow = () => {
+    setShow(true);
+  }
+
+  const handleCopyToClipboard = () => {
+    const codeToCopy = 'hashdopix';
+    copyToClipboard(codeToCopy);
+    setIcon('bi bi-clipboard2-check');
+    setCopyMessage('Código copiado com sucesso'); 
+
+    setTimeout(() => {
+      setIcon('bi bi-clipboard');
+      setCopyMessage('');
+    }, 2000);
+  };
+
   return (
     <>
       <TabsContent>
         <div className="m-tabs-content card rounded-0 mt-3">
-          <div class="container">
+          <div className="container">
             <div className="row">
               <div className="col-12 col-md-3 col-lg-4">
-                <div onClick={() => handleItem('cprcofee01')} className="m-tabs-item py-3 d-flex align-items-start gap-3">
+                <div onClick={handleShow} className="m-tabs-item py-3 d-flex align-items-start gap-3">
                   <i className="link-icon bi bi-chevron-right"></i>
                   <div className="m-tabs-item-info">
                     <div className="d-flex justify-content-between">
@@ -42,7 +70,7 @@ const CPRTabs = () => {
               <div className="divider d-md-none"><hr /></div>
 
               <div className="col-12 col-md-3 col-lg-4">
-                <div onClick={() => handleItem('cprmil01')} className="m-tabs-item py-3 d-flex align-items-start gap-3">
+                <div onClick={handleShow} className="m-tabs-item py-3 d-flex align-items-start gap-3">
                   <i className="link-icon bi bi-chevron-right"></i>
                   <div className="m-tabs-item-info">
                     <div className="d-flex justify-content-between">
@@ -70,6 +98,34 @@ const CPRTabs = () => {
           </div>
         </div>
       </TabsContent>
+      <GenericModal
+        show={show}
+        handleClose={handleClose}
+        title="Comprar CPR"
+        centered={true}
+        size="md"
+        backdrop="static"
+        keyboard={false}
+      >
+        <div className="pay-qrcode-logo mt-4">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1024px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png" alt="Logo PIX" width="110" className="img-fluid d-block mx-auto" />
+        </div>
+        <div className="i-resume-checkout d-flex align-items-center gap-2 mb-3">
+          <img className="img-fluid rounded-1" width="60" src="https://stonoex.mobiup.io/assets/img/cofbr.svg" alt="{itemData.name}" />
+          <div class="d-flex flex-column">
+            <span class="fw-semibold">CPRMIL01</span>
+            016/2016 Produto: Milho em grãos
+          </div>
+        </div>
+        <div className="pay-qrcode-image text-center">
+          <h3 className="fw-bold">Escaneie o QR Code <br />para pagar com PIX</h3>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" alt="" className="img-fluid mx-auto" />
+        </div>
+        <div className="pay-qrcode-hash">
+          {copyMessage && <p className="mb-2 text-success fw-semibold text-center">{copyMessage}</p> }
+          <button onClick={handleCopyToClipboard} className="btn btn-default-transparent btn-lg w-100 d-flex align-items-center justify-content-center gap-2">PIX COPIA E COLA <i className={`fs-3 ${icon}`}></i></button>
+        </div>
+      </GenericModal>
     </>
   );
 };

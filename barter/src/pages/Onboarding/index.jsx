@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Container } from "./styles";
 import { Link, useNavigate } from "react-router-dom";
+import GenericBreadcrumb from "../../components/GenericBreadcrumb";
+import cprIcon from "../../assets/img/icon/cpr.png";
+import supplierIcon from "../../assets/img/icon/supplier.png";
+import traderIcon from "../../assets/img/icon/trader.png";
 
 export const Onboarding = () => {
   const navigate = useNavigate();
@@ -26,16 +30,22 @@ export const Onboarding = () => {
     }
   };
 
+  const previousPage = {
+    title: 'Registrar',
+    url: '/register',
+  };
+
   return (
     <>
       <Container>
+        <GenericBreadcrumb previousPage={previousPage} currentPage="Onboarding" />
         <div className="container h-100">
-          <div className="row justify-content-center  h-100">
+          <div className="row justify-content-center h-100">
             <div className="col-lg-8 h-100">
-              <article className="pt-1 pb-4">
-                <div className="o-content py-3">
+              <article className="pt-1 pb-5">
+                <div className="o-content">
                   <div className="page-title">Onboarding</div>
-                  <p className="fw-semibold mt-5">
+                  <p className="fw-semibold mt-4">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Eligendi sit aspernatur aperiam odit harum, tempora atque,
                     distinctio, repellendus ad facere voluptates fuga possimus
@@ -47,9 +57,9 @@ export const Onboarding = () => {
                       <label htmlFor="/p/cpr" onClick={() => handleLiClick("/p/cpr")}>
                         <div>
                           <img
-                            src="https://via.placeholder.com/60"
+                            src={cprIcon}
                             width="60"
-                            alt=""
+                            alt="CPR Icon"
                           />
                           <span className="ms-2 fw-semibold">
                             Sou proprietário de CPR
@@ -71,9 +81,9 @@ export const Onboarding = () => {
                       <label htmlFor="/p/supplier" onClick={() => handleLiClick("/p/supplier")}>
                         <div>
                           <img
-                            src="https://via.placeholder.com/60"
+                            src={supplierIcon}
                             width="60"
-                            alt=""
+                            alt="Supplier Icon"
                           />
                           <span className="ms-2 fw-semibold">
                             Quero fornecer produtos
@@ -95,9 +105,9 @@ export const Onboarding = () => {
                       <label htmlFor="/p/trader" onClick={() => handleLiClick("/p/trader")}>
                         <div>
                           <img
-                            src="https://via.placeholder.com/60"
+                            src={traderIcon}
                             width="60"
-                            alt=""
+                            alt="Trader Icon"
                           />
                           <span className="ms-2 fw-semibold">Sou trader</span>
                         </div>

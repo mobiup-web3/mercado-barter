@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Container } from "./styles";
 import { Link, useNavigate } from "react-router-dom";
+import GenericBreadcrumb from '../../components/GenericBreadcrumb';
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -45,16 +46,22 @@ export const Register = () => {
 
   const validationClass = error ? 'is-invalid' : (email ? 'is-valid' : '');
 
+  // const previousPage = {
+  //   title: 'Página Anterior',
+  //   url: '/pagina-anterior',
+  // };
+
   return (
     <>
       <Container>
+        <GenericBreadcrumb currentPage="Registrar" />
         <div className="container h-100">
-          <div className="row justify-content-center  h-100">
+          <div className="row justify-content-center h-100">
             <div className="col-lg-8 h-100">  
-              <article className="pt-1 pb-4">
-                <div className="o-content py-3">
+              <article className="pt-1 pb-5">
+                <div className="o-content">
                   <div className="page-title">Autenticação</div>
-                  <p className="fw-semibold mt-5">Descubra o mundo da negociação de tokens. Compre e venda tokens RWA com facilidade em nossa plataforma segura. Obtenha preços e informações de mercado em tempo real para tomar decisões e maximizar seus investimentos.</p>
+                  <p className="fw-semibold mt-4">Descubra o mundo da negociação de tokens. Compre e venda tokens RWA com facilidade em nossa plataforma segura. Obtenha preços e informações de mercado em tempo real para tomar decisões e maximizar seus investimentos.</p>
                   <div className="o-navigation card">
                     <p className="small">Crie sua conta no Mercado Barter. Vamos criar uma carteira na blockchain utilizando seu endereço de e-mail.</p>
                     <div className="form-floating">
