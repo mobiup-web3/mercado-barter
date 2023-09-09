@@ -63,8 +63,12 @@ ul{
 
 /* breadcrumb
 -----------------------*/
-.breadcrumb .breadcrumb-item{
+.breadcrumb {
+    margin: 0 !important;
+}
+.breadcrumb .breadcrumb-item a{
     text-decoration: none;
+    color: var(--m-default-color);
 }
 
 /* general pages

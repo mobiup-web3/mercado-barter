@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import NavbarExtend from "../../components/NavbarExtend";
 import GenericModal from "../../components/GenericModal";
+import GenericBreadcrumb from "../../components/GenericBreadcrumb";
 
 // função para tratar parametro da url
 const findDataByParam = (param) => {
@@ -180,10 +181,16 @@ export const ApproveOffer = () => {
   };
   // validate form end
 
+  const previousPage = {
+    title: 'Marketplace',
+    url: '/p/supplier',
+  };
+
   return (
     <>
       <Container>
         <NavbarExtend />
+        <GenericBreadcrumb currentPage={itemData.name} previousPage={previousPage} />
         <section className="item mt-5">
           <div className="container">
             <div className="row justify-content-center">

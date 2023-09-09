@@ -8,7 +8,7 @@ export const Container = styled.div`
     justify-content: center;
 
     .h-logo img{
-        width: 100%;
+        width: 280px;
         border-radius: 16px;
     }
 

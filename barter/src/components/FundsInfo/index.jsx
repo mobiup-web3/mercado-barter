@@ -32,7 +32,8 @@ const options = {
 
 const FundsInfo = ({ profile }) => {
   return (
-    <Container>
+    <section>
+      <Container>
         {profile === 'trader' && (
         <>
           <section className="funds-trader">
@@ -80,9 +81,9 @@ const FundsInfo = ({ profile }) => {
         </>
         )}
 
-        {profile === 'cpr' && (
+        {profile === 'cpr' || profile === 'supplier' && (
         <>
-          <section className="funds-cpr">
+          <div className="funds-cpr">
             <div className="container">
               <div className="f-card card py-4 px-3 p-4">
                 <div className="row justify-content-between mb-3 mb-md-0 f-initial-info">
@@ -146,10 +147,11 @@ const FundsInfo = ({ profile }) => {
                 </div>
               </div>
             </div>
-          </section>
+          </div>
         </>
         )}
     </Container>
+    </section>
   );
 };
 

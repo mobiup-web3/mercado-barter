@@ -7,6 +7,7 @@ export const TabsContent = styled.nav`
 
     .m-tabs-item{
         position: relative;
+        cursor: pointer;
     }
 
     .m-tabs-item .link-icon{

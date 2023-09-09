@@ -22,6 +22,7 @@ export const Container = styled.div`
         align-items: center;
 
         position: relative;
+        cursor: pointer;
     }
 
     .o-navigation li:not(:last-child){
