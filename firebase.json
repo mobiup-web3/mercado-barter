@@ -20,6 +20,10 @@
     ],
     "rewrites": [
       {
+        "source": "/serviceWorker.js",
+        "destination": "/serviceWorker.js"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
