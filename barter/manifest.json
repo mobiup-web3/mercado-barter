@@ -5,20 +5,17 @@
     {
       "src": "/icon.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "/icon.png",
       "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any maskable"
+      "sizes": "192x192"
     },
     {
       "src": "/icon.png",
       "type": "image/png",
-      "sizes": "512x512",
-      "purpose": "any maskable"
+      "sizes": "512x512"
     }
   ],
   "start_url": "/",
