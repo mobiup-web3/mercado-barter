@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Container } from "./styles";
 import { TabsContent } from "../../components/BarterTabs/styles";
 import NavbarExtend from "../../components/NavbarExtend";
@@ -7,6 +7,8 @@ import FundsInfo from "../../components/FundsInfo";
 import BarterTabs from "../../components/BarterTabs";
 import CPRTabs from "../../components/CPRTabs";
 import GenericBreadcrumb from "../../components/GenericBreadcrumb";
+import Web3 from 'web3';
+import { params } from "../../data/data";
 
 export const Marketplace = () => {
   const { profile } = useParams();
@@ -14,9 +16,113 @@ export const Marketplace = () => {
 
   const expectedProfiles = ['cpr', 'supplier', 'trader'];
 
+  const [balance, setBalance] = useState(0);
+  const [cname, setCname] = useState('');
+  const [csymbol, setCsymbol] = useState('');
+  const [fertilizante, setFertilizante] = useState({});
+  const [wallet, setWallet] = useState('');
+  // Função para buscar o saldo
+  const getBalanceData = async () => {
+    const web3 = new Web3(params.goerli.url);
+    const contract = new web3.eth.Contract(JSON.parse(params.goerli.jabi), params.goerli.cpr_contract_address);
+    const walletAddress = params.goerli.my_address;
+
+    try {
+      const result = await contract.methods.balanceOf(walletAddress).call();
+      const cName = await contract.methods.name().call();
+      const cSymbol = await contract.methods.symbol().call();
+      setBalance(result);
+      setCname(cName);
+      setCsymbol(cSymbol);
+    } catch (error) {
+      console.error('Erro ao buscar saldo:', error);
+    }
+  };
+
+  const getFertilizanteData = async () => {
+    const web3 = new Web3(params.mumbai.url);
+    const contract = new web3.eth.Contract(JSON.parse(params.mumbai.jabi), params.mumbai.atv_contract_address);
+    const walletAddress = params.mumbai.my_address;
+
+    try {
+      const result = await contract.methods.balanceOf(walletAddress).call();
+      const cName = await contract.methods.name().call();
+      const cSymbol = await contract.methods.symbol().call();
+      setFertilizante({
+        name: cName,
+        symbol: cSymbol,
+        balance: result.toString(),
+      });
+    } catch (error) {
+      console.error('Erro ao buscar saldo:', error);
+    }
+  };
+
+//   const sendTransaction = async () => {
+//     const { contractAddress, privateKey, walletAddress, valueInEther } = this.state;
+
+//     // Conecte-se a uma instância Web3 previamente configurada
+//     const web3 = new Web3(this.props.web3Provider);
+
+//     // Calcular o valor em Wei
+//     const valueInWei = web3.utils.toWei(valueInEther.toString(), 'ether');
+
+//     // Instancie uma conta usando a chave privada
+//     const account = web3.eth.accounts.privateKeyToAccount(privateKey);
+
+//     // Instancie o contrato inteligente WAGMI com sua ABI
+//     const contract = new web3.eth.Contract(this.props.contractABI, contractAddress);
+
+//     // Construa a transação
+//     const transaction = {
+//       from: walletAddress,
+//       to: contractAddress,
+//       gas: 200000, // Limite de gás
+//       gasPrice: web3.utils.toWei('10', 'gwei'), // Preço do gás em Wei
+//       value: valueInWei, // Valor a ser enviado em Wei
+//       data: contract.methods.suaFuncaoNoContrato(parametros).encodeABI(), // Encode a chamada da função
+//       nonce: await web3.eth.getTransactionCount(walletAddress), // Número do nonce
+//     };
+
+//     // Assine a transação com a chave privada
+//     const signedTransaction = await web3.eth.accounts.signTransaction(transaction, privateKey);
+
+//     // Enviar a transação
+//     this.setState({ isLoading: true });
+
+//     web3.eth.sendSignedTransaction(signedTransaction.rawTransaction)
+//       .on('transactionHash', (hash) => {
+//         console.log(`Hash da transação: ${hash}`);
+//         // Lógica para lidar com a transação em andamento
+//       })
+//       .on('receipt', (receipt) => {
+//         console.log('Transação confirmada:', receipt);
+//         // Lógica para lidar com a transação confirmada
+//         this.setState({ isLoading: false });
+//       })
+//       .on('error', (error) => {
+//         console.error('Erro ao enviar a transação:', error);
+//         // Lógica para lidar com erros
+//         this.setState({ isLoading: false });
+//       });
+//   }
+
   useEffect(() => {
     if (!expectedProfiles.includes(profile)) {
       navigate('/404');
+    }
+    getBalanceData();
+    getFertilizanteData();
+    localStorage.setItem('profile', profile);
+    console.log("profile", profile);
+    if (profile == 'cpr') {
+        localStorage.setItem('wallet', params.goerli.my_address);
+        setWallet(params.goerli.my_address);
+    } 
+
+    if (profile == 'supplier') {
+        localStorage.setItem('wallet', params.mumbai.my_address);
+        setWallet(params.mumbai.my_address);
     }
   }, [profile, navigate]);
 
@@ -36,9 +142,9 @@ export const Marketplace = () => {
   return (
     <>
     <Container>
-        <NavbarExtend />
+        <NavbarExtend wallet={wallet} profile={profile} />
         <GenericBreadcrumb currentPage="Marketplace" previousPage={previousPage} />
-        <FundsInfo profile={profile} />
+        <FundsInfo profile={profile} balance={balance} name={cname} symbol={csymbol} />
         
         {profile === 'cpr' && (
         <>
@@ -64,7 +170,7 @@ export const Marketplace = () => {
                             <div className="tab-content" id="nav-tabContent">
                                 <div className="tab-pane fade" id="list-one" role="tabpanel" aria-labelledby="list-home-list">...</div>
                                 <div className="tab-pane fade show active" id="list-two" role="tabpanel" aria-labelledby="list-profile-list">
-                                    <BarterTabs />
+                                    <BarterTabs fertilizante={fertilizante} />
                                 </div>
                                 <div className="tab-pane fade" id="list-three" role="tabpanel" aria-labelledby="list-messages-list">...</div>
                             </div>
@@ -112,7 +218,7 @@ export const Marketplace = () => {
                                         </div>
                                         <div className='d-flex flex-column'>
                                         <span className="text-muted fw-semibold">CPRMIL01</span>
-                                        <span class="fs-6">15.045</span>
+                                        <span className="fs-6">15.045</span>
                                         </div>
                                     </div>
                                     </div>
@@ -138,7 +244,7 @@ export const Marketplace = () => {
                                         </div>
                                         <div className='d-flex flex-column'>
                                         <span className="text-muted fw-semibold">CPRMIL01</span>
-                                        <span class="fs-6">959.045455</span>
+                                        <span className="fs-6">959.045455</span>
                                         </div>
                                     </div>
                                     </div>

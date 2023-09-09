@@ -30,7 +30,7 @@ const options = {
   },
 };
 
-const FundsInfo = ({ profile }) => {
+const FundsInfo = ({ profile, balance, name, symbol }) => {
   return (
     <section>
       <Container>

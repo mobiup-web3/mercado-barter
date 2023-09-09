@@ -1,11 +1,11 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import { Container } from "./styles";
 import { useParams, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import NavbarExtend from "../../components/NavbarExtend";
 import GenericModal from "../../components/GenericModal";
 import GenericBreadcrumb from "../../components/GenericBreadcrumb";
+import { formatCurrency } from '../../utils/utils';
 
 // função para tratar parametro da url
 const findDataByParam = (param) => {
@@ -75,6 +75,20 @@ export const Item = () => {
   const navigate = useNavigate(); 
   const itemData = findDataByParam(item);
   const [show, setShow] = useState(false);
+  // validate form start
+  const [selectedValue, setSelectedValue] = useState(null); // Estado para armazenar o valor selecionado
+  const [offerValue, setOfferValue] = useState('');
+  const [profile, setProfile] = useState('');
+  const [wallet, setWallet] = useState('');
+  const [error, setError] = useState({
+    selectedValue: '',
+    offerValue: '',
+  });
+  const [success, setSuccess] = useState({
+    selectedValue: false,
+    offerValue: false,
+  });
+  const [fertilizante, setFertilizante] = useState({});
 
   const handleClose = () => {
     setShow(false);
@@ -84,26 +98,42 @@ export const Item = () => {
   }
 
   useEffect(() => {
+    const previousPageUrl = document.referrer;
+    console.log('URL da página anterior:', previousPageUrl);
+
+
+    // Recupera o JSON do localStorage
+    const fertilizanteJSON = localStorage.getItem('fertilizante');
+
+    // Converte de volta para objeto JavaScript
+    const fertilizanteLocal = JSON.parse(fertilizanteJSON);
+
+    // Verifica se o objeto foi recuperado com sucesso
+    if (fertilizanteLocal) {
+      // Agora você pode usar o objeto fertilizante normalmente
+      console.log(fertilizanteLocal);
+      setFertilizante(fertilizanteLocal);
+    } else {
+      // O objeto não foi encontrado no localStorage
+      console.log('Objeto não encontrado no localStorage');
+    }
+
+    const profileLocal = localStorage.getItem('profile');
+    setProfile(profileLocal);
+
+    const walletLocal = localStorage.getItem('wallet');
+    setWallet(walletLocal);
+
+
     if (!itemData) {
       navigate('/404');
     }
-  }, [itemData, navigate]);
+
+  }, []);
 
   if (!itemData) {
     return null;
   }
-
-  // validate form start
-  const [selectedValue, setSelectedValue] = useState(null); // Estado para armazenar o valor selecionado
-  const [offerValue, setOfferValue] = useState(''); // Estado para armazenar o valor da oferta
-  const [error, setError] = useState({
-    selectedValue: '',
-    offerValue: '',
-  });
-  const [success, setSuccess] = useState({
-    selectedValue: false,
-    offerValue: false,
-  });
 
   const handleSelectedValueChange = (selectedOption) => {
     setSelectedValue(selectedOption);
@@ -180,12 +210,6 @@ export const Item = () => {
       console.log("Form enviado!");
     }
   };
-  // validate form end
-
-  useEffect(() => {
-    const previousPageUrl = document.referrer;
-    console.log('URL da página anterior:', previousPageUrl);
-  }, []);
 
   const previousPage = {
     title: 'Marketplace',
@@ -195,7 +219,7 @@ export const Item = () => {
   return (
     <>
       <Container>
-        <NavbarExtend />
+        <NavbarExtend profile={profile} wallet={wallet} />
         <GenericBreadcrumb previousPage={previousPage} currentPage={itemData.name} />
         <section className="item mt-5">
           <div className="container">
@@ -213,23 +237,23 @@ export const Item = () => {
                 </div>
                 <div className="col-lg-4">
                   <div className="i-content">
-                    <h2 className="fw-bold">{itemData.name}</h2>
+                    <h2 className="fw-bold">{fertilizante?.name}</h2>
                     <div className="i-value mt-4">
                       <small className="text-muted fw-semibold">Preço</small>
-                      <p className="fs-4 fw-bold">{itemData.value}</p>
+                      <p className="fs-4 fw-bold">{formatCurrency(fertilizante?.balance * 0.35)}</p>
                       <div className="i-value-cripto d-flex gap-2 justify-content-between">
                         <div className="d-flex align-items-center gap-2">
                           <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="36" alt="" />
                           <div>
-                            <small className="text-muted fw-semibold">Preço CPRMIL01</small>
-                            <p className="fw-bold">{itemData.cryptoValue.find(entry => entry.currency === 'cprmil01').price}</p>
+                            <small className="text-muted fw-semibold">Preço {fertilizante?.symbol}</small>
+                            <p className="fw-bold">{formatCurrency(fertilizante?.balance * 0.06)}</p>
                           </div>
                         </div>
                         <div className="d-flex align-items-center gap-2">
                           <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="36" alt="" />
                           <div>
                             <small className="text-muted fw-semibold">Preço RD</small>
-                            <p className="fw-bold">{itemData.cryptoValue.find(entry => entry.currency === 'rd').price}</p>
+                            <p className="fw-bold">{formatCurrency(fertilizante?.balance * 0.10)}</p>
                           </div>
                         </div>
                       </div>

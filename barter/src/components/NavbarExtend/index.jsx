@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import { NavbarContainer } from './styles';
 
-const NavbarExtend = () => {
+const NavbarExtend = ({wallet, profile}) => {
+  console.log("wallet", wallet);
+  if (wallet == undefined) {
+    wallet = '0x000000000000000000000';
+  }
   return (
     <NavbarContainer>
         <header className="header py-3">
@@ -12,8 +16,8 @@ const NavbarExtend = () => {
                   <div className="d-flex align-items-center gap-3">
                     <img src="https://via.placeholder.com/60" alt="" className="circle img-fluid" />
                     <div className="d-flex flex-column">
-                      <span className="fw-semibold text-muted small">Olá</span>
-                      <span className="fw-semibold">0x000..6564</span>
+                      <span className="fw-semibold text-muted small">Olá {profile == 'cpr' ? 'Agricultor' : profile == 'supplier' ? 'Fornecedor' : 'Trader/Banco'}</span>
+                      <span className="fw-semibold">{wallet.substring(0, 6)}...{wallet.substring(wallet.length - 4)}</span>
                     </div>
                   </div>
                 </div>
