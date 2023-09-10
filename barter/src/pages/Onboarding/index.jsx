@@ -49,10 +49,7 @@ export const Onboarding = () => {
                 <div className="o-content">
                   <div className="page-title">Onboarding</div>
                   <p className="fw-semibold mt-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Eligendi sit aspernatur aperiam odit harum, tempora atque,
-                    distinctio, repellendus ad facere voluptates fuga possimus
-                    neque aliquid iste amet. Provident, assumenda cum?
+                    Acesso ao mercado barter  
                   </p>
 
                   <ul className="o-navigation card">
@@ -112,7 +109,7 @@ export const Onboarding = () => {
                             width="60"
                             alt="Trader Icon"
                           />
-                          <span className="ms-2 fw-semibold">Sou trader</span>
+                          <span className="ms-2 fw-semibold">Sou trader/Instituição Financeira</span>
                         </div>
                         <div className="o-navigation-radio">
                           <input

@@ -305,7 +305,7 @@ const FundsInfo = ({ profile, cpr, fertilizante, rd, tradercpr, cprrd }) => {
                           <i className='bi bi-info-circle-fill ms-1'></i>
                         </GenericTooltip>
                       </small>
-                    <p className="fs-4 fw-bold m-0">{parseInt(cpr?.supply).toFixed(2)} {cpr?.symbol}</p>
+                    <p className="fs-4 fw-bold m-0">{parseInt(cpr?.supply).toFixed(2) ? parseInt(cpr?.supply).toFixed(2) : 0} {cpr?.symbol}</p>
                     </div>
                     <div>
                       <small className="text-muted fw-semibold">

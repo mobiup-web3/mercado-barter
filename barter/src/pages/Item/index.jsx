@@ -406,7 +406,7 @@ export const Item = () => {
                 </div>
                 <div className="col-lg-4">
                   <div className="i-content">
-                    <h2 className="fw-bold">{fertilizante?.name}</h2>
+                    <h2 className="fw-bold">5kg Adubo Fertilizante Uréia</h2>
                     <div className="i-value mt-4">
                       <small className="text-muted fw-semibold">Preço</small>
                       <p className="fs-4 fw-bold">{formatCurrency(fertilizante?.balance * 0.35)}</p>
@@ -414,8 +414,8 @@ export const Item = () => {
                         <div className="d-flex align-items-center gap-2">
                           <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="36" alt="" />
                           <div>
-                            <small className="text-muted fw-semibold">Preço {fertilizante?.symbol}</small>
-                            <p className="fw-bold">{formatCurrency(fertilizante?.balance * 0.06)}</p>
+                            <small className="text-muted fw-semibold">Preço {cpr?.symbol}</small>
+                            <p className="fw-bold">{formatCurrency(500)}</p>
                           </div>
                         </div>
                         <div className="d-flex align-items-center gap-2">

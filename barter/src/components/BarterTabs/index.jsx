@@ -120,8 +120,8 @@ const BarterTabs = ({fertilizante, cpr}) => {
                                                             <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="32" alt=""/>
                                                         </div>
                                                         <div className='d-flex flex-column'>
-                                                            <span className="text-muted fw-semibold">{fertilizante?.symbol}</span>
-                                                            <span className="fs-6">{parseInt(fertilizante?.balance).toFixed(2)}</span>
+                                                            <span className="text-muted fw-semibold">{cpr?.symbol}</span>
+                                                            <span className="fs-6">500</span>
                                                         </div>
                                                     </div>
                                                 </div>
