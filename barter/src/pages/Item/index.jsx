@@ -15,7 +15,7 @@ const findDataByParam = (param) => {
     {
       param: 'eclipse-cross-hipe',
       name: 'Eclipse Cross Hipe',
-      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rem magnam adipisci non delectus culpa quo autem, at eos officiis tempora cupiditate consequuntur itaque magni!',
+      description: 'O Eclipse Cross Hipe é um SUV moderno e versátil que combina estilo contemporâneo com desempenho eficiente. Seu design elegante e recursos avançados tornam a experiência de condução única, tornando-o uma escolha ideal para quem procura um veículo que une sofisticação e funcionalidade.',
       value: 'R$ 210.990,00',
       creator: 'Concessionária XYZ',
       cryptoValue: [
@@ -27,7 +27,7 @@ const findDataByParam = (param) => {
     {
       param: 'ureia-fertilizante',
       name: 'Ureia Composto',
-      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rem magnam adipisci non delectus culpa quo autem, at eos officiis tempora cupiditate consequuntur itaque magni!',
+      description: 'A Ureia Composto é um fertilizante essencial para o crescimento saudável das plantas. Este composto fornece às plantas o nitrogênio necessário para prosperar, promovendo um desenvolvimento robusto e uma colheita abundante. Ideal para agricultura e jardinagem, a Ureia Composto é uma solução confiável para nutrir seu solo e suas plantas.',
       value: 'R$ 2.708,10',
       creator: 'Rootex',
       cryptoValue: [
