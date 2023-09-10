@@ -284,7 +284,7 @@ export const Marketplace = () => {
                         <div className="m-tabs-content">
                             <div className="tab-content" id="nav-tabContent">
                                 <div className="tab-pane fade show active" id="list-one" role="tabpanel" aria-labelledby="list-home-list">
-                                    <CPRTabs />
+                                    <CPRTabs cpr={cpr} />
                                 </div>
                                 <div className="tab-pane fade" id="list-two" role="tabpanel" aria-labelledby="list-profile-list">
                                     ...

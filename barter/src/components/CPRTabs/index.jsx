@@ -5,7 +5,7 @@ import GenericModal from "../GenericModal";
 import copyToClipboard from '../../utils/clipboard.js';
 
 
-const CPRTabs = () => {
+const CPRTabs = ({cpr}) => {
   const navigate = useNavigate();
   const [icon, setIcon] = useState('bi bi-clipboard');
   const [copyMessage, setCopyMessage] = useState('');
@@ -116,9 +116,9 @@ const CPRTabs = () => {
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1024px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png" alt="Logo PIX" width="110" className="img-fluid d-block mx-auto" />
         </div>
         <div className="i-resume-checkout d-flex align-items-center gap-2 mb-3">
-          <img className="img-fluid rounded-1" width="60" src="https://stonoex.mobiup.io/assets/img/cofbr.svg" alt="{itemData.name}" />
+          <img className="img-fluid rounded-1" width="60" src="https://agristore.com/image/cache/catalog/Di%20Solo/milho-ipanema-20-kg-1200x1200.png" alt="{itemData.name}" />
           <div className="d-flex flex-column">
-            <span className="fw-semibold">CPRMIL01</span>
+            <span className="fw-semibold">{cpr?.name}</span>
             016/2016 Produto: Milho em grãos
           </div>
         </div>
