@@ -383,6 +383,55 @@ export const ApproveOffer = () => {
     url: '/p/supplier',
   };
 
+  useEffect(() => {
+    if (blockchain) {
+      // Função para adicionar a classe "done" aos elementos desejados
+      const addDoneClass = () => {
+        const progressStep2 = document.getElementById('progressStep2');
+        const progressStepText2 = document.getElementById('progressStepText2');
+
+        setTimeout(function(){
+          if (progressStep2 && progressStepText2) {
+            progressStep2.classList.add('progress-active');
+            progressStepText2.classList.add('done');
+          }
+        }, 3000);
+      };
+
+      // Chame a função para adicionar a classe
+      addDoneClass();
+    }
+  }, [blockchain]);
+
+  const addDoneClassToElement = (elementId) => {
+    const element = document.getElementById(`progressStep${elementId}`);
+      if (element) {
+        element.classList.add('progress-active');
+        const textElement = document.getElementById(`progressStepText${elementId}`);
+        if (textElement) {
+          textElement.classList.add('done');
+        }
+      }
+  };
+
+  useEffect(() => {
+    if (linkAprovacao != '') {
+      addDoneClassToElement(2);
+    }
+  }, [linkAprovacao]);
+
+  useEffect(() => {
+    if (linkConfirmacao != '') {
+      addDoneClassToElement(3);
+    }
+  }, [linkConfirmacao]);
+
+  useEffect(() => {
+    if (statusBlockchain) {
+      addDoneClassToElement(4);
+    }
+  }, [statusBlockchain]);
+
   return (
     <>
       <Container>
@@ -506,25 +555,43 @@ export const ApproveOffer = () => {
         )}
 
           {blockchain ? (
-          <div className="container">
-            <div className="row justify-content-center">
-              <div className="col-lg-12">
-                <div className="i-description mt-4 d-md-none">
-                  <small className="text-muted fw-semibold">Aprovação:</small>
-                  <p className="mt-2 mb-0 fw-semibold"><a href={linkAprovacao} target="_blank">{linkAprovacao == '' ? 'Carregando...' : 'Ver na Blockchain'}</a></p>
+          <div className="w-100 d-flex justify-content-center flex-column" style={{overflow: 'hidden', minHeight: '325px'}}>
+            <div className="d-flex justify-content-center">
+              <div className="progress-container mt-4">
+                <div className="progress-circle progress-active" id="progressStep1">
+                  <i className="bi bi-check fs-3"></i>
+                  </div>
+                <div className="progress-circle" id="progressStep2">
+                  <i className="bi bi-check fs-3"></i>
                 </div>
-                <div className="i-description mt-4 d-md-none">
-                  <small className="text-muted fw-semibold">Confirmação:</small>
-                  <p className="mt-2 mb-0 fw-semibold"><a href={linkConfirmacao} target="_blank">{linkConfirmacao == '' ? 'Carregando...' : 'Ver na Blockchain'}</a></p>
+                <div className="progress-circle" id="progressStep3">
+                  <i className="bi bi-check fs-3"></i>
                 </div>
-                <div className="i-description mt-4 d-md-none">
-                  <small className="text-muted fw-semibold">Status:</small>
-                  <p className="mt-2 mb-0 fw-semibold">
-                  {statusBlockchain == false ? 'Enviando...' : 'Enviado'}
-                  </p>
+                <div className="progress-circle" id="progressStep4">
+                  <i className="bi bi-check fs-3"></i>
                 </div>
               </div>
             </div>
+            <div className="progress-container-text">
+                <p className="step-title mb-1" id="progressStepText4">Operação concluída <i className="bi bi-check-circle-fill text-success"></i></p>
+                <p className="step-title mb-1" id="progressStepText3">Confirmando na rede <a className="fs-6" href={linkConfirmacao} target="_blank"><i className="bi bi-box-arrow-up-right"></i></a></p>
+                <p className="step-title mb-1" id="progressStepText2">Aprovando na blockchain <a className="fs-6" href={linkAprovacao} target="_blank"><i className="bi bi-box-arrow-up-right"></i></a></p>
+                <p className="step-title done mb-1" id="progressStepText1">Oferta recebida</p>
+            </div>
+            {/* <div className="i-description mt-4 d-md-none">
+              <small className="text-muted fw-semibold">Aprovação:</small>
+              <p className="mt-2 mb-0 fw-semibold"><a href={linkAprovacao} target="_blank">{linkAprovacao == '' ? 'Carregando...' : 'Ver na Blockchain'}</a></p>
+            </div>
+            <div className="i-description mt-4 d-md-none">
+              <small className="text-muted fw-semibold">Confirmação:</small>
+              <p className="mt-2 mb-0 fw-semibold"><a href={linkConfirmacao} target="_blank">{linkConfirmacao == '' ? 'Carregando...' : 'Ver na Blockchain'}</a></p>
+            </div>
+            <div className="i-description mt-4 d-md-none">
+              <small className="text-muted fw-semibold">Status:</small>
+              <p className="mt-2 mb-0 fw-semibold">
+              {statusBlockchain == false ? 'Enviando...' : 'Enviado'}
+              </p>
+            </div> */}
           </div>
           ) : ('')}
         </GenericModal>
