@@ -33,7 +33,7 @@ const options = {
   },
 };
 
-const FundsInfo = ({ profile, cpr, fertilizante }) => {
+const FundsInfo = ({ profile, cpr, fertilizante, rd }) => {
   console.log("profileprofileprofileprofile", profile);
   return (
     <section>
@@ -55,7 +55,7 @@ const FundsInfo = ({ profile, cpr, fertilizante }) => {
                 <div className="row">
                   <div className="col-lg-12">
                     <div>
-                      <span className="fs-1 fw-bold"><small>R$</small> 145.000,00 <img src={ pixIcon } width="18" alt="" className="img-fluid" /></span>
+                      <span className="fs-1 fw-bold">{formatCurrency(parseInt(rd?.balance))} <img src={ pixIcon } width="18" alt="" className="img-fluid" /></span>
                     </div>
                   </div>
                 </div>

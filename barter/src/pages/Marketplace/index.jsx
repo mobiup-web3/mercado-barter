@@ -18,6 +18,7 @@ export const Marketplace = () => {
   const expectedProfiles = ['cpr', 'supplier', 'trader'];
 
   const [fertilizante, setFertilizante] = useState({});
+  const [realDigital, setRealDigital] = useState({});
   const [cpr, setCpr] = useState({});
   const [wallet, setWallet] = useState('');
   // Função para buscar o saldo
@@ -70,14 +71,37 @@ export const Marketplace = () => {
     }
   };
 
+  const getRealDigitalData = async () => {
+    const web3 = new Web3(params.goerli.url);
+    const contract = new web3.eth.Contract(JSON.parse(params.goerli.rd_abi), params.goerli.rd_contract);
+    const walletAddress = params.goerli.address_trader;
+
+    try {
+      const result = await contract.methods.balanceOf(walletAddress).call();
+      const cName = await contract.methods.name().call();
+      const cSymbol = await contract.methods.symbol().call();
+      const cSupply = await contract.methods.totalSupply().call();
+      setRealDigital({
+        name: cName,
+        symbol: cSymbol,
+        balance: result.toString(),
+        supply: cSupply.toString()
+      });
+    } catch (error) {
+      console.error('Erro ao buscar saldo:', error);
+    }
+  };
+
   useEffect(() => {
     if (!expectedProfiles.includes(profile)) {
       navigate('/404');
     }
     getBalanceData();
     getFertilizanteData();
+    getRealDigitalData();
+
     localStorage.setItem('profile', profile);
-    console.log("profile", profile);
+    
     if (profile == 'cpr') {
         localStorage.setItem('wallet', params.goerli.my_address);
         setWallet(params.goerli.my_address);
@@ -86,6 +110,11 @@ export const Marketplace = () => {
     if (profile == 'supplier') {
         localStorage.setItem('wallet', params.mumbai.my_address);
         setWallet(params.mumbai.my_address);
+    }
+
+    if (profile == 'trader') {
+        localStorage.setItem('wallet', params.goerli.address_trader);
+        setWallet(params.goerli.address_trader);
     }
   }, [profile, navigate]);
 
@@ -109,7 +138,7 @@ export const Marketplace = () => {
     <Container>
         <NavbarExtend wallet={wallet} profile={profile} />
         <GenericBreadcrumb currentPage="Marketplace" previousPage={previousPage} />
-        <FundsInfo profile={profile} cpr={cpr} fertilizante={fertilizante} />
+        <FundsInfo profile={profile} cpr={cpr} fertilizante={fertilizante} rd={realDigital} />
         
         {profile === 'cpr' && (
         <>
