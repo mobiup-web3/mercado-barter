@@ -261,7 +261,7 @@ export const Item = () => {
         gas: 200000,
         gasPrice: await web3.eth.getGasPrice(),
         value: valueInWei,
-        data: contract.methods.approve(params.goerli.htlc_contract, 10).encodeABI(),
+        data: contract.methods.approve(params.goerli.htlc_contract, 500).encodeABI(),
         nonce: await web3.eth.getTransactionCount(params.goerli.my_address),
       };
 
@@ -293,7 +293,7 @@ export const Item = () => {
             gas: 500000,
             gasPrice: await web3.eth.getGasPrice(),
             value: valueInWeiHtcl,
-            data: contractHtcl.methods.newSwap(params.mumbai.my_address, params.goerli.cpr_contract_address, '0xc888c9ce9e098d5864d3ded6ebcc140a12142263bace3a23a36f9905f12bd64a', 1000000000, 10).encodeABI(),
+            data: contractHtcl.methods.newSwap(params.mumbai.my_address, params.goerli.cpr_contract_address, '0xc888c9ce9e098d5864d3ded6ebcc140a12142263bace3a23a36f9905f12bd64a', 1000000000, 500).encodeABI(),
             nonce: await web3.eth.getTransactionCount(params.goerli.my_address),
           };
 

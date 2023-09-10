@@ -66,7 +66,7 @@ const FundsInfo = ({ profile, cpr, fertilizante, rd, tradercpr, cprrd }) => {
         gas: 400000,
         gasPrice: await web3.eth.getGasPrice(),
         value: valueInWei,
-        data: contract.methods.mint(params.goerli.address_trader, 150).encodeABI(),
+        data: contract.methods.mint(params.goerli.address_trader, 500).encodeABI(),
       };
   
       // Assine a transação com a chave privada

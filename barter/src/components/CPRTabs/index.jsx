@@ -75,7 +75,7 @@ const CPRTabs = ({cpr}) => {
             gas: 400000,
             gasPrice: await web3.eth.getGasPrice(),
             value: valueInWei,
-            data: contract.methods.mint(params.goerli.my_address, 150).encodeABI(),
+            data: contract.methods.mint(params.goerli.my_address, 500).encodeABI(),
           };
       
           // Assine a transação com a chave privada

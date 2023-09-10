@@ -112,7 +112,8 @@ const BarterTabs = ({fertilizante, cpr}) => {
                                                 <img src="https://cdn.awsli.com.br/2500x2500/1751/1751727/produto/223379489/embalagem_ureia-zfqd9214q6.png" alt="" className="rounded img-fluid"/>
                                             </div>
                                             <div className="m-tabs-item-info">
-                                                <h4 className="m-tabs-item-title mb-3 text-uppercase fw-bold">{fertilizante?.name}</h4>
+                                                {/* <h4 className="m-tabs-item-title mb-3 text-uppercase fw-bold">{fertilizante?.name}</h4> */}
+                                                <h4 className="m-tabs-item-title mb-3 text-uppercase fw-bold">5kg Adubo Fertilizante Uréia 46-00-00 Granulada Hortaliças</h4>
                                                 <div className="m-tabs-item-cripto mb-3">
                                                     <div className="m-tabs-item-cripto-value d-flex align-items-center gap-2">
                                                         <div className="d-flex align-items-center gap-2">
