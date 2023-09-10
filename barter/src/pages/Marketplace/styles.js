@@ -8,6 +8,8 @@ export const Container = styled.div`
         font-size: 13px;
         font-weight: 600;
         text-align: center;
+        display: flex;
+        align-items: center;
     }
     
     .m-tabs-menu .list-group-item.active{
