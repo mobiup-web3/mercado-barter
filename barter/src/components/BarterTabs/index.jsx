@@ -18,9 +18,10 @@ const BarterTabs = ({fertilizante, cpr}) => {
                     <div className="list-group list-group-horizontal" id="list-tab-barter" role="tablist">
                         <a className="list-group-item list-group-item-action" id="list-one-list" data-bs-toggle="list" href="#list-one-barter" role="tab" aria-controls="list-home">Veículos</a>
                         <a className="list-group-item list-group-item-action active" id="list-two-list-barter" data-bs-toggle="list" href="#list-two-barter" role="tab" aria-controls="list-profile">Fertilizantes</a>
-                        <a className="list-group-item list-group-item-action" id="list-three-list-barter" data-bs-toggle="list" href="#list-three-barter" role="tab" aria-controls="list-messages">Fertilizantes</a>
-                        <a className="list-group-item list-group-item-action" id="list-four-list-barter" data-bs-toggle="list" href="#list-four-barter" role="tab" aria-controls="list-messages">Fertilizantes</a>
-                        <a className="list-group-item list-group-item-action" id="list-five-list-barter" data-bs-toggle="list" href="#list-five-barter" role="tab" aria-controls="list-messages">Fertilizantes</a>
+                        <a className="list-group-item list-group-item-action" id="list-three-list-barter" data-bs-toggle="list" href="#list-three-barter" role="tab" aria-controls="list-messages">Ferramentas</a>
+                        <a className="list-group-item list-group-item-action" id="list-four-list-barter" data-bs-toggle="list" href="#list-four-barter" role="tab" aria-controls="list-messages">Sementes e mudas</a>
+                        <a className="list-group-item list-group-item-action" id="list-five-list-barter" data-bs-toggle="list" href="#list-five-barter" role="tab" aria-controls="list-messages">Defensivos agrícolas</a>
+                        <a className="list-group-item list-group-item-action" id="list-five-list-barter" data-bs-toggle="list" href="#list-six-barter" role="tab" aria-controls="list-messages">Irrigação</a>
                     </div>
                 </div>
             </Container>
@@ -141,6 +142,7 @@ const BarterTabs = ({fertilizante, cpr}) => {
                         <div className="tab-pane fade" id="list-three-barter" role="tabpanel" aria-labelledby="list-messages-list">...</div>
                         <div className="tab-pane fade" id="list-four-barter" role="tabpanel" aria-labelledby="list-messages-list">...</div>
                         <div className="tab-pane fade" id="list-five-barter" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+                        <div className="tab-pane fade" id="list-six-barter" role="tabpanel" aria-labelledby="list-messages-list">...</div>
                     </div>
                 </div>
             </TabsContent>
