@@ -17,11 +17,36 @@ export const Marketplace = () => {
 
   const expectedProfiles = ['cpr', 'supplier', 'trader'];
 
-  const [fertilizante, setFertilizante] = useState({});
-  const [realDigital, setRealDigital] = useState({});
-  const [cpr, setCpr] = useState({});
-  const [tradercpr, setTradercpr] = useState({});
-  const [cprrd, setCprrd] = useState({});
+  const [fertilizante, setFertilizante] = useState({
+    name: '',
+    symbol: '',
+    balance: 0,
+    supply: 0
+  });
+  const [realDigital, setRealDigital] = useState({
+    name: '',
+    symbol: '',
+    balance: 0,
+    supply: 0
+  });
+  const [cpr, setCpr] = useState({
+    name: '',
+    symbol: '',
+    balance: 0,
+    supply: 0
+  });
+  const [tradercpr, setTradercpr] = useState({
+    name: '',
+    symbol: '',
+    balance: 0,
+    supply: 0
+  });
+  const [cprrd, setCprrd] = useState({
+    name: '',
+    symbol: '',
+    balance: 0,
+    supply: 0
+  });
   const [wallet, setWallet] = useState('');
   
 
