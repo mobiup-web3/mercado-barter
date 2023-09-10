@@ -513,18 +513,20 @@ export const Item = () => {
 
         {blockchain ? (
           <div className="w-100 d-flex justify-content-center flex-column" style={{overflow: 'hidden', minHeight: '325px'}}>
-            <div className="progress-container mt-4">
-              <div className="progress-circle progress-active" id="progressStep1">
-                <i className="bi bi-check fs-3"></i>
+            <div className="d-flex justify-content-center">
+              <div className="progress-container mt-4">
+                <div className="progress-circle progress-active" id="progressStep1">
+                  <i className="bi bi-check fs-3"></i>
+                  </div>
+                <div className="progress-circle" id="progressStep2">
+                  <i className="bi bi-check fs-3"></i>
                 </div>
-              <div className="progress-circle" id="progressStep2">
-                <i className="bi bi-check fs-3"></i>
-              </div>
-              <div className="progress-circle" id="progressStep3">
-                <i className="bi bi-check fs-3"></i>
-              </div>
-              <div className="progress-circle" id="progressStep4">
-                <i className="bi bi-check fs-3"></i>
+                <div className="progress-circle" id="progressStep3">
+                  <i className="bi bi-check fs-3"></i>
+                </div>
+                <div className="progress-circle" id="progressStep4">
+                  <i className="bi bi-check fs-3"></i>
+                </div>
               </div>
             </div>
             <div className="progress-container-text">

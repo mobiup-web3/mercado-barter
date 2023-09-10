@@ -90,6 +90,8 @@ export const ApproveOffer = () => {
   const navigate = useNavigate(); 
   const itemData = findDataByParam(item);
   const [show, setShow] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
+  const [modalTitle, setModalTitle] = useState('Confirmar acordo');
   const [profile, setProfile] = useState('');
   const [wallet, setWallet] = useState('');
   const [swap, setSwap] = useState(0);
@@ -100,6 +102,7 @@ export const ApproveOffer = () => {
   const [linkConfirmacao, setLinkConfirmacao] = useState('');
   const [formraw, setFormraw] = useState(true);
   const [blockchain, setBlockchain] = useState(false);
+  const [waitingStep, setWaitingStep] = useState(false);
   const [statusBlockchain, setStatusBlockchain] = useState(false);
   const [error, setError] = useState({
     selectedValue: '',
@@ -114,6 +117,10 @@ export const ApproveOffer = () => {
     setShow(false);
   }
   const handleShow = () => {
+    setFormraw(true);
+    setWaitingStep(false);
+    setBlockchain(false);
+    setShowHeader(true);
     setShow(true);
   }
 
@@ -208,6 +215,9 @@ export const ApproveOffer = () => {
   
     if (isValid) {
       setFormraw(false);
+      setWaitingStep(true);
+      setShowHeader(false);
+      setModalTitle('Aguarde');
       // Conecte-se a uma instância Web3 previamente configurada
       const web3 = new Web3(new Web3.providers.HttpProvider(params.mumbai.url));
 
@@ -236,7 +246,10 @@ export const ApproveOffer = () => {
 
       web3.eth.sendSignedTransaction(signedTransaction.rawTransaction)
         .on('transactionHash', (hash) => {
+          setWaitingStep(false);
           setBlockchain(true);
+          setShowHeader(true);
+          setModalTitle('Confirmar acordo');
           console.log(`Hash da transação: ${hash}`);
           setLinkAprovacao(params.mumbai.scan + hash);
           // Lógica para lidar com a transação em andamento
@@ -455,6 +468,7 @@ export const ApproveOffer = () => {
         </section>
         <GenericModal
           show={show}
+          showHeader={showHeader}
           handleClose={handleClose}
           title="Confirmar acordo"
           centered={true}
@@ -481,6 +495,15 @@ export const ApproveOffer = () => {
               </div>
             </>
           ) : ('')}
+
+        {waitingStep && (
+          <div className="text-center h-100 d-flex flex-column align-items-center justify-content-center gap-3 py-5" style={{minHeight: '325px'}}>
+            <h3 className="m-0 fw-semibold">Aguarde enquanto processamos sua transação...</h3>
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        )}
 
           {blockchain ? (
           <div className="container">
