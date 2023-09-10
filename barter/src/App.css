@@ -119,3 +119,45 @@ ul{
     background-color: rgba(0,0,0,.05);
     /* // backdrop-filter: blur(8px); */
 }
+
+/*
+---------------------*/
+.progress-container{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 30px;
+    max-width: 100%;
+    width: 350px;
+}
+.progress-container::before{
+    content: "";
+    background-color: #ccc;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 4px;
+    width: 100%;
+    z-index: 1;
+    transition: 0.4s ease;
+}
+.progress-circle{
+    background-color: #fff;
+    color: #333;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    border: 3px solid #b2bec3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .4s ease;
+    position: relative;
+    z-index: 2;
+}
+.progress-circle.progress-active{
+    border-color: #b2bec3;
+    background-color: #333;
+    color: #fff;
+}

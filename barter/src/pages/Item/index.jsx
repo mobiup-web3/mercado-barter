@@ -454,31 +454,33 @@ export const Item = () => {
         {waitingStep && (
           <div className="text-center h-100 d-flex flex-column align-items-center justify-content-center gap-3 py-5" style={{minHeight: '325px'}}>
             <h3 className="m-0 fw-semibold">Aguarde enquanto processamos sua transação...</h3>
-            <div class="spinner-border" role="status">
-              <span class="visually-hidden">Loading...</span>
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
             </div>
           </div>
         )}
 
         {blockchain ? (
-          <div className="container">
-            <div className="row justify-content-center">
-              <div className="col-lg-12">
-                <div className="i-description mt-4 d-md-none">
-                  <small className="text-muted fw-semibold">Aprovação:</small>
-                  <p className="mt-2 mb-0 fw-semibold"><a href={linkAprovacao} target="_blank">{linkAprovacao == '' ? 'Carregando...' : 'Ver na Blockchain'}</a></p>
-                </div>
-                <div className="i-description mt-4 d-md-none">
-                  <small className="text-muted fw-semibold">Confirmação:</small>
-                  <p className="mt-2 mb-0 fw-semibold"><a href={linkConfirmacao} target="_blank">{linkConfirmacao == '' ? 'Carregando...' : 'Ver na Blockchain'}</a></p>
-                </div>
-                <div className="i-description mt-4 d-md-none">
-                  <small className="text-muted fw-semibold">Status:</small>
-                  <p className="mt-2 mb-0 fw-semibold">
-                  {statusBlockchain == false ? 'Enviando...' : 'Enviado'}
-                  </p>
-                </div>
-              </div>
+          <div>
+            <div className="progress-container">
+              <div className="progress-circle progress-active" id="progressStep1"><i className="bi bi-check"></i></div>
+              <div className="progress-circle progress-active" id="progressStep2"><i className="bi bi-check"></i></div>
+              <div className="progress-circle progress-active" id="progressStep3"><i className="bi bi-check"></i></div>
+              <div className="progress-circle progress-active" id="progressStep4"><i className="bi bi-check"></i></div>
+            </div>
+            <div className="i-description mt-4 d-md-none">
+              <small className="text-muted fw-semibold">Aprovação:</small>
+              <p className="mt-2 mb-0 fw-semibold"><a href={linkAprovacao} target="_blank">{linkAprovacao == '' ? 'Carregando...' : 'Ver na Blockchain'}</a></p>
+            </div>
+            <div className="i-description mt-4 d-md-none">
+              <small className="text-muted fw-semibold">Confirmação:</small>
+              <p className="mt-2 mb-0 fw-semibold"><a href={linkConfirmacao} target="_blank">{linkConfirmacao == '' ? 'Carregando...' : 'Ver na Blockchain'}</a></p>
+            </div>
+            <div className="i-description mt-4 d-md-none">
+              <small className="text-muted fw-semibold">Status:</small>
+              <p className="mt-2 mb-0 fw-semibold">
+              {statusBlockchain == false ? 'Enviando...' : 'Enviado'}
+              </p>
             </div>
           </div>
         ) : ('')}

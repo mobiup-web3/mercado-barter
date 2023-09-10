@@ -5,6 +5,8 @@ import { Container } from './styles';
 import GenericTooltip from '../GenericTooltip';
 import { formatCurrency } from '../../utils/utils';
 
+import pixIcon from '../../assets/img/icon/pix.svg'
+
 const totalValue = 30000;
 const availableValue = 12550;
 
@@ -53,7 +55,7 @@ const FundsInfo = ({ profile, cpr, fertilizante }) => {
                 <div className="row">
                   <div className="col-lg-12">
                     <div>
-                      <span className="fs-1 fw-bold"><small>R$</small> 145.000,00</span>
+                      <span className="fs-1 fw-bold"><small>R$</small> 145.000,00 <img src={ pixIcon } width="18" alt="" className="img-fluid" /></span>
                     </div>
                   </div>
                 </div>
