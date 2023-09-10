@@ -161,3 +161,14 @@ ul{
     background-color: #333;
     color: #fff;
 }
+.progress-container-text p {
+    opacity: 0.2;
+    text-align: center;
+    color: #333;
+    font-weight: 700;
+    font-size: 18px;
+    transition: .2s ease;
+}
+.progress-container-text p.done {
+    opacity: 1;
+}
