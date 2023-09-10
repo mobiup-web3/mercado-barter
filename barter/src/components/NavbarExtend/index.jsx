@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 import { NavbarContainer } from './styles';
 
 const NavbarExtend = ({wallet, profile}) => {
-  console.log("wallet", wallet);
+  console.log("wallet", wallet, profile);
   if (wallet == undefined) {
     wallet = '0x000000000000000000000';
   }
+
   return (
     <NavbarContainer>
         <header className="header py-3">

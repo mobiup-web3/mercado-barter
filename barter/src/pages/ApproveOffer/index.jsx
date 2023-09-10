@@ -1,10 +1,12 @@
 import { Container } from "./styles";
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import Select from 'react-select';
 import NavbarExtend from "../../components/NavbarExtend";
 import GenericModal from "../../components/GenericModal";
 import GenericBreadcrumb from "../../components/GenericBreadcrumb";
+import { formatCurrency } from "../../utils/utils";
+import { params } from "../../data/data";
+import Web3 from "web3";
 
 // função para tratar parametro da url
 const findDataByParam = (param) => {
@@ -22,8 +24,8 @@ const findDataByParam = (param) => {
       image: 'https://cdn.motor1.com/images/mgl/3WWyL6/s1/mitsubishi-eclipse-cross-hpe-s-awc-2023.jpg',
     },
     {
-      param: 'rootex-fertilizante',
-      name: 'Rootex Fertilizante',
+      param: 'ureia-fertilizante',
+      name: 'Ureia Composto',
       description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rem magnam adipisci non delectus culpa quo autem, at eos officiis tempora cupiditate consequuntur itaque magni!',
       value: 'R$ 2.708,10',
       creator: 'Rootex',
@@ -31,7 +33,19 @@ const findDataByParam = (param) => {
         { currency: 'rd', price: '2708.10' },
         { currency: 'cprmil01', price: '15.045' },
       ],
-      image: 'https://http2.mlstatic.com/D_NQ_NP_970839-MLU69446511865_052023-O.webp',
+      image: 'https://cdn.awsli.com.br/2500x2500/1751/1751727/produto/223379489/embalagem_ureia-zfqd9214q6.png',
+    },
+    {
+      param: 'milho-cpr',
+      name: 'Milho Saca',
+      description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rem magnam adipisci non delectus culpa quo autem, at eos officiis tempora cupiditate consequuntur itaque magni!',
+      value: 'R$ 39,90',
+      creator: 'Ind Mil Thons',
+      cryptoValue: [
+        { currency: 'rd', price: '2708.10' },
+        { currency: 'cprmil01', price: '15.045' },
+      ],
+      image: 'https://agristore.com/image/cache/catalog/Di%20Solo/milho-ipanema-20-kg-1200x1200.png',
     }
   ];
 
@@ -74,6 +88,25 @@ export const ApproveOffer = () => {
   const navigate = useNavigate(); 
   const itemData = findDataByParam(item);
   const [show, setShow] = useState(false);
+  const [profile, setProfile] = useState('');
+  const [wallet, setWallet] = useState('');
+  const [swap, setSwap] = useState(0);
+  const [fertilizante, setFertilizante] = useState({});
+  const [selectedValue, setSelectedValue] = useState(null);
+  const [offerValue, setOfferValue] = useState('');
+  const [linkAprovacao, setLinkAprovacao] = useState('');
+  const [linkConfirmacao, setLinkConfirmacao] = useState('');
+  const [formraw, setFormraw] = useState(true);
+  const [blockchain, setBlockchain] = useState(false);
+  const [statusBlockchain, setStatusBlockchain] = useState(false);
+  const [error, setError] = useState({
+    selectedValue: '',
+    offerValue: '',
+  });
+  const [success, setSuccess] = useState({
+    selectedValue: false,
+    offerValue: false,
+  });
 
   const handleClose = () => {
     setShow(false);
@@ -83,26 +116,38 @@ export const ApproveOffer = () => {
   }
 
   useEffect(() => {
+    const profileLocal = localStorage.getItem('profile');
+    setProfile(profileLocal);
+    const walletLocal = localStorage.getItem('wallet');
+    setWallet(walletLocal);
+
+    // Recupera o JSON do localStorage
+    const fertilizanteJSON = localStorage.getItem('fertilizante');
+
+    // Converte de volta para objeto JavaScript
+    const fertilizanteLocal = JSON.parse(fertilizanteJSON);
+
+    const swapLocal = localStorage.getItem('swap_quantity');
+    setSwap(swapLocal);
+
+    // Verifica se o objeto foi recuperado com sucesso
+    if (fertilizanteLocal) {
+      // Agora você pode usar o objeto fertilizante normalmente
+      console.log(fertilizanteLocal);
+      setFertilizante(fertilizanteLocal);
+    } else {
+      // O objeto não foi encontrado no localStorage
+      console.log('Objeto não encontrado no localStorage');
+    }
+
     if (!itemData) {
       navigate('/404');
     }
-  }, [itemData, navigate]);
+  }, []);
 
   if (!itemData) {
     return null;
   }
-
-  // validate form start
-  const [selectedValue, setSelectedValue] = useState(null); // Estado para armazenar o valor selecionado
-  const [offerValue, setOfferValue] = useState(''); // Estado para armazenar o valor da oferta
-  const [error, setError] = useState({
-    selectedValue: '',
-    offerValue: '',
-  });
-  const [success, setSuccess] = useState({
-    selectedValue: false,
-    offerValue: false,
-  });
 
   const handleSelectedValueChange = (selectedOption) => {
     setSelectedValue(selectedOption);
@@ -156,25 +201,161 @@ export const ApproveOffer = () => {
     return isValid;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  
-    const isValid = validateForm();
+  const handleEnd = async () => {
+    const isValid = true;
   
     if (isValid) {
-      // Redefine os estados de erro para indicar sucesso
-      setError({
-        selectedValue: '',
-        offerValue: '',
-      });
-  
-      // Agora você pode aplicar classes de feedback de sucesso
-      // Por exemplo, você pode adicionar classes "is-valid" aos campos
-      // Para dar feedback visual de sucesso
-      setSuccess({
-        selectedValue: true,
-        offerValue: true,
-      });
+      setFormraw(false);
+      // Conecte-se a uma instância Web3 previamente configurada
+      const web3 = new Web3(new Web3.providers.HttpProvider(params.mumbai.url));
+
+      // Calcular o valor em Wei
+      const valueInWei = web3.utils.toWei(0, 'ether');
+
+      // Instancie uma conta usando a chave privada
+      const account = web3.eth.accounts.privateKeyToAccount('0x' + params.mumbai.my_private);
+
+      // Instancie o contrato inteligente WAGMI com sua ABI
+      const contract = new web3.eth.Contract(JSON.parse(params.mumbai.jabi), params.mumbai.atv_contract_address);
+
+      // Construa a transação
+      const transaction = {
+        from: params.mumbai.my_address,
+        to: params.mumbai.atv_contract_address,
+        gas: 400000,
+        gasPrice: await web3.eth.getGasPrice(),
+        value: valueInWei,
+        data: contract.methods.approve(params.mumbai.htlc_contract, 10).encodeABI(),
+        nonce: await web3.eth.getTransactionCount(params.mumbai.my_address),
+      };
+
+      // Assine a transação com a chave privada
+      const signedTransaction = await web3.eth.accounts.signTransaction(transaction, params.mumbai.my_private);
+
+      web3.eth.sendSignedTransaction(signedTransaction.rawTransaction)
+        .on('transactionHash', (hash) => {
+          setBlockchain(true);
+          console.log(`Hash da transação: ${hash}`);
+          setLinkAprovacao(params.mumbai.scan + hash);
+          // Lógica para lidar com a transação em andamento
+        })
+        .on('receipt', async (receipt) => {
+          console.log('Transação confirmada:', receipt);
+          // Lógica para lidar com a transação confirmada
+          //this.setState({ isLoading: false });
+
+          // Instancie o contrato inteligente WAGMI com sua ABI
+          const contractHtcl = new web3.eth.Contract(JSON.parse(params.mumbai.htlc_abi), params.mumbai.htlc_contract);
+          const valueInWeiHtcl = web3.utils.toWei(0, 'ether');
+          // Construa a transação
+          const transactionHtcl = {
+            from: params.mumbai.my_address,
+            to: params.mumbai.htlc_contract,
+            gas: 400000,
+            gasPrice: await web3.eth.getGasPrice(),
+            value: valueInWeiHtcl,
+            data: contractHtcl.methods.newSwap(params.goerli.my_address, params.mumbai.atv_contract_address, '0xc888c9ce9e098d5864d3ded6ebcc140a12142263bace3a23a36f9905f12bd64a', 1000000000, 10).encodeABI(),
+            nonce: await web3.eth.getTransactionCount(params.mumbai.my_address),
+          };
+
+          // Assine a transação com a chave privada
+          const signedTransactionHtcl = await web3.eth.accounts.signTransaction(transactionHtcl, params.mumbai.my_private);
+
+          web3.eth.sendSignedTransaction(signedTransactionHtcl.rawTransaction)
+            .on('transactionHash', (hash) => {
+              console.log(`Swap Hash da transação: ${hash}`);
+              setLinkConfirmacao(params.mumbai.scan + hash);
+              localStorage.setItem('swap', 'OK');
+
+              setStatusBlockchain(true);
+              // Lógica para lidar com a transação em andamento
+            })
+            .on('receipt', async (receipt) => {
+              console.log('Swap Transação confirmada:', receipt);
+
+              const swapIndex = await contractHtcl.methods.swapIndex().call();
+              console.log("swapIndex 1", swapIndex.toString());
+              const valueInWeiHtclFinishSwap = web3.utils.toWei(0, 'ether');
+              // Construa a transação
+              const transactionHtclFinishSwap = {
+                from: params.mumbai.my_address,
+                to: params.goerli.htlc_contract,
+                gas: 500000,
+                gasPrice: await web3.eth.getGasPrice(),
+                value: valueInWeiHtclFinishSwap,
+                data: contractHtcl.methods.finalizeSwap(parseInt(swapIndex.toString()), '0xc888c9ce9e098d5864d3ded6ebcc140a12142263bace3a23a36f9905f12bd64a').encodeABI(),
+                nonce: await web3.eth.getTransactionCount(params.mumbai.my_address),
+              };
+
+              // Assine a transação com a chave privada
+              const signedTransactionHtclFinishSwap = await web3.eth.accounts.signTransaction(transactionHtclFinishSwap, params.mumbai.my_private);
+
+              web3.eth.sendSignedTransaction(signedTransactionHtclFinishSwap.rawTransaction)
+                .on('transactionHash', (hash) => {
+                  console.log(`Swap Finish 1 Hash da transação: ${hash}`);
+                  // Lógica para lidar com a transação em andamento
+                })
+                .on('receipt', async (receipt) => {
+                  console.log('Swap Finish 1 Transação confirmada:', receipt);
+                  // Lógica para lidar com a transação confirmada
+
+                  const contractHtclEnd = new web3.eth.Contract(JSON.parse(params.goerli.htlc_abi), params.goerli.htlc_contract);
+
+                  const swapIndexEnd = await contractHtclEnd.methods.swapIndex().call();
+
+                  const valueInWeiHtclFinishSwapEnd = web3.utils.toWei(0, 'ether');
+                  // Construa a transação
+                  const transactionHtclFinishSwapEnd = {
+                    from: params.mumbai.my_address,
+                    to: params.goerli.htlc_contract,
+                    gas: 600000,
+                    gasPrice: await web3.eth.getGasPrice(),
+                    value: valueInWeiHtclFinishSwapEnd,
+                    data: contractHtclEnd.methods.finalizeSwap(parseInt(swapIndexEnd.toString()), '123456').encodeABI(),
+                    nonce: await web3.eth.getTransactionCount(params.mumbai.my_address),
+                  };
+
+                  // Assine a transação com a chave privada
+                  const signedTransactionHtclFinishSwapEnd = await web3.eth.accounts.signTransaction(transactionHtclFinishSwapEnd, params.mumbai.my_private);
+
+                  web3.eth.sendSignedTransaction(signedTransactionHtclFinishSwapEnd.rawTransaction)
+                    .on('transactionHash', (hash) => {
+                      console.log(`Swap Finish 2 Hash da transação: ${hash}`);
+                      // Lógica para lidar com a transação em andamento
+                    })
+                    .on('receipt', async (receipt) => {
+                      console.log('Swap Finish 2 Transação confirmada:', receipt);
+                      // Lógica para lidar com a transação confirmada
+
+                    })
+                    .on('error', (error) => {
+                      setFormraw(true);
+                      console.error('Swap Finish 2 Erro ao enviar a transação:', error);
+                      // Lógica para lidar com erros
+                    });
+
+                })
+                .on('error', (error) => {
+                  setFormraw(true);
+                  console.error('Swap Finish 1 Erro ao enviar a transação:', error);
+                  // Lógica para lidar com erros
+                });
+
+              // Lógica para lidar com a transação confirmada
+            })
+            .on('error', (error) => {
+              setFormraw(true);
+              console.error('Swap Erro ao enviar a transação:', error);
+              // Lógica para lidar com erros
+              //this.setState({ isLoading: false });
+            });
+        })
+        .on('error', (error) => {
+          setFormraw(true);
+          console.error('Erro ao enviar a transação:', error);
+          // Lógica para lidar com erros
+          //this.setState({ isLoading: false });
+        });
   
       console.log("Form enviado!");
     }
@@ -189,7 +370,7 @@ export const ApproveOffer = () => {
   return (
     <>
       <Container>
-        <NavbarExtend />
+        <NavbarExtend wallet={wallet} profile={profile} />
         <GenericBreadcrumb currentPage={itemData.name} previousPage={previousPage} />
         <section className="item mt-5">
           <div className="container">
@@ -209,21 +390,21 @@ export const ApproveOffer = () => {
                   <div className="i-content">
                     <h2 className="fw-bold">{itemData.name}</h2>
                     <div className="i-value mt-4">
-                      <small className="text-muted fw-semibold">Preço</small>
+                      <small className="text-muted fw-semibold">Preço Unit</small>
                       <p className="fs-4 fw-bold">{itemData.value}</p>
                       <div className="i-value-cripto d-flex gap-2 justify-content-between">
                         <div className="d-flex align-items-center gap-2">
                           <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="36" alt="" />
                           <div>
-                            <small className="text-muted fw-semibold">Preço CPRMIL01</small>
-                            <p className="fw-bold">{itemData.cryptoValue.find(entry => entry.currency === 'cprmil01').price}</p>
+                            <small className="text-muted fw-semibold">Preço Total {fertilizante?.symbol}</small>
+                            <p className="fw-bold">{formatCurrency(parseInt(fertilizante?.balance) * 0.06)}</p>
                           </div>
                         </div>
                         <div className="d-flex align-items-center gap-2">
                           <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="36" alt="" />
                           <div>
                             <small className="text-muted fw-semibold">Preço RD</small>
-                            <p className="fw-bold">{itemData.cryptoValue.find(entry => entry.currency === 'rd').price}</p>
+                            <p className="fw-bold">{formatCurrency(parseInt(fertilizante?.balance) * 0.02)}</p>
                           </div>
                         </div>
                         
@@ -239,8 +420,8 @@ export const ApproveOffer = () => {
                             <span>Sua oferta foi aceita <i className="bi bi-check-circle text-success"></i></span>
                           </div>
                         </div>
-                        <div class="i-offer-info-value text-end">
-                          <span>15.045 CPRMIL01</span>
+                        <div className="i-offer-info-value text-end">
+                          <span>{swap} {fertilizante?.symbol}</span>
                         </div>
                       </div>
                       <div className="i-offer-info-box d-flex align-items-center justify-content-between mt-3">
@@ -251,23 +432,11 @@ export const ApproveOffer = () => {
                             <span>Aguardando aprovação da oferta</span>
                           </div>
                         </div>
-                        <div class="i-offer-info-value text-end">
-                          <span>15.045 CPRMIL01</span>
+                        <div className="i-offer-info-value text-end">
+                          <span>{swap} {fertilizante?.symbol}</span>
                         </div>
                       </div>
-                      
                     </div>
-                    {/* <div className="i-description mt-4 d-md-none">
-                      <small className="text-muted fw-semibold">Descrição</small>
-                      <p className="mt-2 mb-0 fw-semibold">{itemData.description}</p>
-                    </div> */}
-                    {/* <div className="i-owner d-flex align-items-center gap-3 mt-4 mb-5 pb-5">
-                      <img src="https://via.placeholder.com/60" className="circle" width="60" alt="" />
-                      <div>
-                        <small className="text-muted fw-semibold">Anunciado por</small>
-                        <p className="fw-bold m-0">Concessionária Xpto</p>
-                      </div>
-                    </div> */}
                   </div>
                   <div className="i-button p-2">
                     <button onClick={handleShow} className="btn btn-default btn-lg w-100 text-uppercase mt-1">Confirmar Minha parte do Acordo</button>
@@ -290,21 +459,48 @@ export const ApproveOffer = () => {
           backdrop="static"
           keyboard={false}
         >
-          <p className="fw-semibold m-0">Deseja confirmar sua parte no acordo? Essa ação não poderá ser desfeita.</p>
-          <div className="i-resume-checkout d-flex gap-2">
-            <img className="img-fluid rounded-1" width="90" src={itemData.image} alt={itemData.name} />
-            <div>
-              <span class="fw-semibold">{itemData.name}</span>
-              <div class="small d-flex align-items-center gap-2 text-muted fw-semibold">
-                <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="22" alt="" /> 
-                15.045 CPRMIL01
+          {formraw ? (
+            <>
+              <p className="fw-semibold m-0">Deseja confirmar sua parte no acordo? Essa ação não poderá ser desfeita.</p>
+              <div className="i-resume-checkout d-flex gap-2">
+                <img className="img-fluid rounded-1" width="90" src={itemData.image} alt={itemData.name} />
+                <div>
+                  <span className="fw-semibold">{itemData.name}</span>
+                  <div className="small d-flex align-items-center gap-2 text-muted fw-semibold">
+                    <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="22" alt="" /> 
+                    {swap} {fertilizante?.symbol}
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button onClick={handleEnd} className="btn btn-default btn-lg w-100">Sim, quero confirmar</button>
+                <button onClick={handleClose} className="btn btn-default-transparent btn-lg w-100 mt-1 mb-0">Voltar</button>
+              </div>
+            </>
+          ) : ('')}
+
+          {blockchain ? (
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className="col-lg-12">
+                <div className="i-description mt-4 d-md-none">
+                  <small className="text-muted fw-semibold">Aprovação:</small>
+                  <p className="mt-2 mb-0 fw-semibold"><a href={linkAprovacao} target="_blank">{linkAprovacao == '' ? 'Carregando...' : 'Ver na Blockchain'}</a></p>
+                </div>
+                <div className="i-description mt-4 d-md-none">
+                  <small className="text-muted fw-semibold">Confirmação:</small>
+                  <p className="mt-2 mb-0 fw-semibold"><a href={linkConfirmacao} target="_blank">{linkConfirmacao == '' ? 'Carregando...' : 'Ver na Blockchain'}</a></p>
+                </div>
+                <div className="i-description mt-4 d-md-none">
+                  <small className="text-muted fw-semibold">Status:</small>
+                  <p className="mt-2 mb-0 fw-semibold">
+                  {statusBlockchain == false ? 'Enviando...' : 'Enviado'}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-          <div>
-            <button className="btn btn-default btn-lg w-100">Sim, quero confirmar</button>
-            <button onClick={handleClose} className="btn btn-default-transparent btn-lg w-100 mt-1 mb-0">Voltar</button>
-          </div>
+          ) : ('')}
         </GenericModal>
       </Container>
     </>

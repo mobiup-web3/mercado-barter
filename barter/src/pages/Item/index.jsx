@@ -6,6 +6,8 @@ import NavbarExtend from "../../components/NavbarExtend";
 import GenericModal from "../../components/GenericModal";
 import GenericBreadcrumb from "../../components/GenericBreadcrumb";
 import { formatCurrency } from '../../utils/utils';
+import Web3 from 'web3';
+import { params } from '../../data/data';
 
 // função para tratar parametro da url
 const findDataByParam = (param) => {
@@ -23,8 +25,8 @@ const findDataByParam = (param) => {
       image: 'https://cdn.motor1.com/images/mgl/3WWyL6/s1/mitsubishi-eclipse-cross-hpe-s-awc-2023.jpg',
     },
     {
-      param: 'rootex-fertilizante',
-      name: 'Rootex Fertilizante',
+      param: 'ureia-fertilizante',
+      name: 'Ureia Composto',
       description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis rem magnam adipisci non delectus culpa quo autem, at eos officiis tempora cupiditate consequuntur itaque magni!',
       value: 'R$ 2.708,10',
       creator: 'Rootex',
@@ -32,7 +34,7 @@ const findDataByParam = (param) => {
         { currency: 'rd', price: '2708.10' },
         { currency: 'cprmil01', price: '15.045' },
       ],
-      image: 'https://http2.mlstatic.com/D_NQ_NP_970839-MLU69446511865_052023-O.webp',
+      image: 'https://cdn.awsli.com.br/2500x2500/1751/1751727/produto/223379489/embalagem_ureia-zfqd9214q6.png',
     }
   ];
 
@@ -75,11 +77,15 @@ export const Item = () => {
   const navigate = useNavigate(); 
   const itemData = findDataByParam(item);
   const [show, setShow] = useState(false);
-  // validate form start
-  const [selectedValue, setSelectedValue] = useState(null); // Estado para armazenar o valor selecionado
+  const [selectedValue, setSelectedValue] = useState(null);
   const [offerValue, setOfferValue] = useState('');
   const [profile, setProfile] = useState('');
   const [wallet, setWallet] = useState('');
+  const [linkAprovacao, setLinkAprovacao] = useState('');
+  const [linkConfirmacao, setLinkConfirmacao] = useState('');
+  const [formraw, setFormraw] = useState(true);
+  const [blockchain, setBlockchain] = useState(false);
+  const [statusBlockchain, setStatusBlockchain] = useState(false);
   const [error, setError] = useState({
     selectedValue: '',
     offerValue: '',
@@ -89,6 +95,7 @@ export const Item = () => {
     offerValue: false,
   });
   const [fertilizante, setFertilizante] = useState({});
+  const [cpr, setCpr] = useState({});
 
   const handleClose = () => {
     setShow(false);
@@ -113,6 +120,21 @@ export const Item = () => {
       // Agora você pode usar o objeto fertilizante normalmente
       console.log(fertilizanteLocal);
       setFertilizante(fertilizanteLocal);
+    } else {
+      // O objeto não foi encontrado no localStorage
+      console.log('Objeto não encontrado no localStorage');
+    }
+
+    // Recupera o JSON do localStorage
+    const cprJSON = localStorage.getItem('cpr');
+
+    // Converte de volta para objeto JavaScript
+    const cprLocal = JSON.parse(cprJSON);
+
+    // Verifica se o objeto foi recuperado com sucesso
+    if (cprLocal) {
+      // Agora você pode usar o objeto fertilizante normalmente
+      setCpr(cprLocal);
     } else {
       // O objeto não foi encontrado no localStorage
       console.log('Objeto não encontrado no localStorage');
@@ -181,13 +203,14 @@ export const Item = () => {
       isValid = false;
       errors.offerValue = 'Informe o valor da oferta.';
     }
-  
+    localStorage.setItem('swap_quantity', offerValue);
+    console.log("swap_quantity", offerValue)
     setError(errors);
   
     return isValid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
   
     const isValid = validateForm();
@@ -206,6 +229,90 @@ export const Item = () => {
         selectedValue: true,
         offerValue: true,
       });
+
+
+      setFormraw(false);
+      // Conecte-se a uma instância Web3 previamente configurada
+      const web3 = new Web3(new Web3.providers.HttpProvider(params.goerli.url));
+
+      // Calcular o valor em Wei
+      const valueInWei = web3.utils.toWei(0, 'ether');
+
+      // Instancie uma conta usando a chave privada
+      const account = web3.eth.accounts.privateKeyToAccount('0x' + params.goerli.my_private);
+
+      // Instancie o contrato inteligente WAGMI com sua ABI
+      const contract = new web3.eth.Contract(JSON.parse(params.goerli.jabi), params.goerli.cpr_contract_address);
+
+      // Construa a transação
+      const transaction = {
+        from: params.goerli.my_address,
+        to: params.goerli.cpr_contract_address,
+        gas: 200000,
+        gasPrice: await web3.eth.getGasPrice(),
+        value: valueInWei,
+        data: contract.methods.approve(params.goerli.htlc_contract, 10).encodeABI(),
+        nonce: await web3.eth.getTransactionCount(params.goerli.my_address),
+      };
+
+      // Assine a transação com a chave privada
+      const signedTransaction = await web3.eth.accounts.signTransaction(transaction, params.goerli.my_private);
+
+      web3.eth.sendSignedTransaction(signedTransaction.rawTransaction)
+        .on('transactionHash', (hash) => {
+          setBlockchain(true);
+          console.log(`Hash da transação: ${hash}`);
+          setLinkAprovacao(params.goerli.scan + hash);
+          // Lógica para lidar com a transação em andamento
+        })
+        .on('receipt', async (receipt) => {
+          console.log('Transação confirmada:', receipt);
+          // Lógica para lidar com a transação confirmada
+          //this.setState({ isLoading: false });
+
+          // Instancie o contrato inteligente WAGMI com sua ABI
+          const contractHtcl = new web3.eth.Contract(JSON.parse(params.goerli.htlc_abi), params.goerli.htlc_contract);
+          const valueInWeiHtcl = web3.utils.toWei(0, 'ether');
+          // Construa a transação
+          const transactionHtcl = {
+            from: params.goerli.my_address,
+            to: params.goerli.htlc_contract,
+            gas: 500000,
+            gasPrice: await web3.eth.getGasPrice(),
+            value: valueInWeiHtcl,
+            data: contractHtcl.methods.newSwap(params.mumbai.my_address, params.goerli.cpr_contract_address, '0xc888c9ce9e098d5864d3ded6ebcc140a12142263bace3a23a36f9905f12bd64a', 1000000000, 10).encodeABI(),
+            nonce: await web3.eth.getTransactionCount(params.goerli.my_address),
+          };
+
+          // Assine a transação com a chave privada
+          const signedTransactionHtcl = await web3.eth.accounts.signTransaction(transactionHtcl, params.goerli.my_private);
+
+          web3.eth.sendSignedTransaction(signedTransactionHtcl.rawTransaction)
+            .on('transactionHash', (hash) => {
+              console.log(`Swap Hash da transação: ${hash}`);
+              setLinkConfirmacao(params.goerli.scan + hash);
+              localStorage.setItem('swap', 'OK');
+              setStatusBlockchain(true);
+              // Lógica para lidar com a transação em andamento
+            })
+            .on('receipt', (receipt) => {
+              console.log('Swap Transação confirmada:', receipt);
+              // Lógica para lidar com a transação confirmada
+              //this.setState({ isLoading: false });
+            })
+            .on('error', (error) => {
+              setFormraw(true);
+              console.error('Swap Erro ao enviar a transação:', error);
+              // Lógica para lidar com erros
+              //this.setState({ isLoading: false });
+            });
+        })
+        .on('error', (error) => {
+          setFormraw(true);
+          console.error('Erro ao enviar a transação:', error);
+          // Lógica para lidar com erros
+          //this.setState({ isLoading: false });
+        });
   
       console.log("Form enviado!");
     }
@@ -253,7 +360,7 @@ export const Item = () => {
                           <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="36" alt="" />
                           <div>
                             <small className="text-muted fw-semibold">Preço RD</small>
-                            <p className="fw-bold">{formatCurrency(fertilizante?.balance * 0.10)}</p>
+                            <p className="fw-bold">{formatCurrency(fertilizante?.balance * 0.02)}</p>
                           </div>
                         </div>
                       </div>
@@ -292,13 +399,16 @@ export const Item = () => {
         backdrop="static"
         keyboard={false}
       >
-        <form onSubmit={handleSubmit}>
+        {formraw ? (
+          <form onSubmit={handleSubmit}>
           <p className="small">Envie sua oferta agora mesmo. Selecione a moeda e informe o valor para da oferta.</p>
           <div className={`my-3 ${success.selectedValue ? 'is-valid' : ''}`}>
             <label htmlFor="offer-cripto" className="fw-semibold small text-muted">Vou ofertar com</label>
             <Select
               id="offer-cripto"
-              options={options}
+              options={[
+                { value: cpr?.symbol, label: cpr?.symbol, icon: 'https://stonoex.mobiup.io/assets/img/cofbr.svg' }
+              ]}
               value={selectedValue}
               onChange={handleSelectedValueChange}
               styles={customStyles}
@@ -325,6 +435,29 @@ export const Item = () => {
           </div>
           <button type="submit" className="btn btn-default w-100 text-uppercase">Enviar Oferta</button>
         </form>
+        ) : ('')}
+        {blockchain ? (
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className="col-lg-12">
+                <div className="i-description mt-4 d-md-none">
+                  <small className="text-muted fw-semibold">Aprovação:</small>
+                  <p className="mt-2 mb-0 fw-semibold"><a href={linkAprovacao} target="_blank">{linkAprovacao == '' ? 'Carregando...' : 'Ver na Blockchain'}</a></p>
+                </div>
+                <div className="i-description mt-4 d-md-none">
+                  <small className="text-muted fw-semibold">Confirmação:</small>
+                  <p className="mt-2 mb-0 fw-semibold"><a href={linkConfirmacao} target="_blank">{linkConfirmacao == '' ? 'Carregando...' : 'Ver na Blockchain'}</a></p>
+                </div>
+                <div className="i-description mt-4 d-md-none">
+                  <small className="text-muted fw-semibold">Status:</small>
+                  <p className="mt-2 mb-0 fw-semibold">
+                  {statusBlockchain == false ? 'Enviando...' : 'Enviado'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : ('')}
       </GenericModal>
     </>
   );

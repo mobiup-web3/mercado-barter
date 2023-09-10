@@ -104,7 +104,7 @@ const BarterTabs = ({fertilizante}) => {
                                 <div className="row">
                                     <div className="col-12 col-md-3 col-lg-4">
                                         <div onClick={
-                                                () => handleItem('rootex-fertilizante', fertilizante)
+                                                () => handleItem('ureia-fertilizante', fertilizante)
                                             }
                                             className="m-tabs-item py-3 d-flex align-items-start gap-3">
                                             <i className="link-icon bi bi-chevron-right"></i>

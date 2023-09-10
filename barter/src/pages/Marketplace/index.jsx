@@ -9,6 +9,7 @@ import CPRTabs from "../../components/CPRTabs";
 import GenericBreadcrumb from "../../components/GenericBreadcrumb";
 import Web3 from 'web3';
 import { params } from "../../data/data";
+import { formatCurrency } from '../../utils/utils';
 
 export const Marketplace = () => {
   const { profile } = useParams();
@@ -16,10 +17,8 @@ export const Marketplace = () => {
 
   const expectedProfiles = ['cpr', 'supplier', 'trader'];
 
-  const [balance, setBalance] = useState(0);
-  const [cname, setCname] = useState('');
-  const [csymbol, setCsymbol] = useState('');
   const [fertilizante, setFertilizante] = useState({});
+  const [cpr, setCpr] = useState({});
   const [wallet, setWallet] = useState('');
   // Função para buscar o saldo
   const getBalanceData = async () => {
@@ -31,9 +30,20 @@ export const Marketplace = () => {
       const result = await contract.methods.balanceOf(walletAddress).call();
       const cName = await contract.methods.name().call();
       const cSymbol = await contract.methods.symbol().call();
-      setBalance(result);
-      setCname(cName);
-      setCsymbol(cSymbol);
+      const cSupply = await contract.methods.totalSupply().call();
+      setCpr({
+        name: cName,
+        symbol: cSymbol,
+        balance: result.toString(),
+        supply: cSupply.toString()
+      });
+      const cprJSON = JSON.stringify({
+        name: cName,
+        symbol: cSymbol,
+        balance: result.toString(),
+        supply: cSupply.toString()
+      });
+      localStorage.setItem('cpr', cprJSON);
     } catch (error) {
       console.error('Erro ao buscar saldo:', error);
     }
@@ -48,64 +58,17 @@ export const Marketplace = () => {
       const result = await contract.methods.balanceOf(walletAddress).call();
       const cName = await contract.methods.name().call();
       const cSymbol = await contract.methods.symbol().call();
+      const cSupply = await contract.methods.totalSupply().call();
       setFertilizante({
         name: cName,
         symbol: cSymbol,
         balance: result.toString(),
+        supply: cSupply.toString()
       });
     } catch (error) {
       console.error('Erro ao buscar saldo:', error);
     }
   };
-
-//   const sendTransaction = async () => {
-//     const { contractAddress, privateKey, walletAddress, valueInEther } = this.state;
-
-//     // Conecte-se a uma instância Web3 previamente configurada
-//     const web3 = new Web3(this.props.web3Provider);
-
-//     // Calcular o valor em Wei
-//     const valueInWei = web3.utils.toWei(valueInEther.toString(), 'ether');
-
-//     // Instancie uma conta usando a chave privada
-//     const account = web3.eth.accounts.privateKeyToAccount(privateKey);
-
-//     // Instancie o contrato inteligente WAGMI com sua ABI
-//     const contract = new web3.eth.Contract(this.props.contractABI, contractAddress);
-
-//     // Construa a transação
-//     const transaction = {
-//       from: walletAddress,
-//       to: contractAddress,
-//       gas: 200000, // Limite de gás
-//       gasPrice: web3.utils.toWei('10', 'gwei'), // Preço do gás em Wei
-//       value: valueInWei, // Valor a ser enviado em Wei
-//       data: contract.methods.suaFuncaoNoContrato(parametros).encodeABI(), // Encode a chamada da função
-//       nonce: await web3.eth.getTransactionCount(walletAddress), // Número do nonce
-//     };
-
-//     // Assine a transação com a chave privada
-//     const signedTransaction = await web3.eth.accounts.signTransaction(transaction, privateKey);
-
-//     // Enviar a transação
-//     this.setState({ isLoading: true });
-
-//     web3.eth.sendSignedTransaction(signedTransaction.rawTransaction)
-//       .on('transactionHash', (hash) => {
-//         console.log(`Hash da transação: ${hash}`);
-//         // Lógica para lidar com a transação em andamento
-//       })
-//       .on('receipt', (receipt) => {
-//         console.log('Transação confirmada:', receipt);
-//         // Lógica para lidar com a transação confirmada
-//         this.setState({ isLoading: false });
-//       })
-//       .on('error', (error) => {
-//         console.error('Erro ao enviar a transação:', error);
-//         // Lógica para lidar com erros
-//         this.setState({ isLoading: false });
-//       });
-//   }
 
   useEffect(() => {
     if (!expectedProfiles.includes(profile)) {
@@ -135,7 +98,9 @@ export const Marketplace = () => {
     url: '/onboarding',
   };
 
-  const handleItem = (param) => {
+  const handleItem = (param, fertilizante) => {
+    const fertilizanteJSON = JSON.stringify(fertilizante);
+    localStorage.setItem('fertilizante', fertilizanteJSON);
     navigate('/approve-offer/' + param);
   }
 
@@ -144,7 +109,7 @@ export const Marketplace = () => {
     <Container>
         <NavbarExtend wallet={wallet} profile={profile} />
         <GenericBreadcrumb currentPage="Marketplace" previousPage={previousPage} />
-        <FundsInfo profile={profile} balance={balance} name={cname} symbol={csymbol} />
+        <FundsInfo profile={profile} cpr={cpr} fertilizante={fertilizante} />
         
         {profile === 'cpr' && (
         <>
@@ -204,32 +169,39 @@ export const Marketplace = () => {
                     <div className="m-tabs-content caR$ rounded-0 mt-3">
                         <div className="row">
                             <div className="col-12 col-md-3 col-lg-4">
-                                <div onClick={() => handleItem('rootex-fertilizante')} className="m-tabs-item py-3 d-flex align-items-start gap-3">
+                                <div onClick={() => handleItem('milho-cpr', cpr)} className="m-tabs-item py-3 d-flex align-items-start gap-3">
                                 <i className="link-icon bi bi-chevron-right"></i>
                                 <div className="m-tabs-item-media">
-                                    <img src="https://http2.mlstatic.com/D_NQ_NP_970839-MLU69446511865_052023-O.webp" alt="" className="rounded img-fluid" />
+                                    <img src="https://agristore.com/image/cache/catalog/Di%20Solo/milho-ipanema-20-kg-1200x1200.png" alt="" className="rounded img-fluid" />
                                 </div>
                                 <div className="m-tabs-item-info">
-                                    <h4 className="m-tabs-item-title mb-3 text-uppercase fw-bold">Rootex Fertilizante</h4>
+                                    <h4 className="m-tabs-item-title mb-3 text-uppercase fw-bold">{cpr?.name}</h4>
                                     <div className="m-tabs-item-cripto mb-3">
                                     <div className="m-tabs-item-cripto-value d-flex align-items-center gap-2">
                                         <div className="d-flex align-items-center gap-2">
                                         <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="32" alt="" />
                                         </div>
                                         <div className='d-flex flex-column'>
-                                        <span className="text-muted fw-semibold">CPRMIL01</span>
-                                        <span className="fs-6">15.045</span>
+                                        <span className="text-muted fw-semibold">{cpr?.symbol}</span>
+                                        <span className="fs-6">{parseInt(cpr?.balance).toFixed(2)}</span>
                                         </div>
                                     </div>
                                     </div>
-                                    <div className="m-tabs-item-value"><small className="fw-semibold text-muted">Valor convertido para real digital</small><p className='m-0'>R$ 2.708,10</p></div>
+                                    <div className="m-tabs-item-value">
+                                        <small className="fw-semibold text-muted">
+                                            Valor convertido para real digital
+                                        </small>
+                                        <p className='m-0'>
+                                            {formatCurrency(parseInt(cpr?.balance) * 0.02)}
+                                        </p>
+                                    </div>
                                 </div>
                                 </div> {/* item 1 ends here */}
                             </div>
 
                             <div className="divider d-md-none"><hr /></div>
 
-                            <div className="col-12 col-md-3 col-lg-4">
+                            {/* <div className="col-12 col-md-3 col-lg-4">
                                 <div onClick={() => handleItem('eclipse-cross-hipe')} className="m-tabs-item py-3 d-flex align-items-start gap-3">
                                 <i className="link-icon bi bi-chevron-right"></i>
                                 <div className="m-tabs-item-media">
@@ -250,8 +222,8 @@ export const Marketplace = () => {
                                     </div>
                                     <div className="m-tabs-item-value"><small className="fw-semibold text-muted">Valor convertido para real digital</small><p className='m-0'>R$ 210.990,00</p></div>
                                 </div>
-                                </div> {/* veiculo 1 ends here */}
-                            </div>
+                                </div>
+                            </div> */}
                         </div>
                     </div>
                 </TabsContent>

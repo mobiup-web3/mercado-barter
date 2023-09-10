@@ -3,6 +3,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js/auto';
 import { Doughnut } from 'react-chartjs-2';
 import { Container } from './styles';
 import GenericTooltip from '../GenericTooltip';
+import { formatCurrency } from '../../utils/utils';
 
 const totalValue = 30000;
 const availableValue = 12550;
@@ -30,7 +31,8 @@ const options = {
   },
 };
 
-const FundsInfo = ({ profile, balance, name, symbol }) => {
+const FundsInfo = ({ profile, cpr, fertilizante }) => {
+  console.log("profileprofileprofileprofile", profile);
   return (
     <section>
       <Container>
@@ -81,7 +83,77 @@ const FundsInfo = ({ profile, balance, name, symbol }) => {
         </>
         )}
 
-        {profile === 'cpr' || profile === 'supplier' && (
+        {profile === 'supplier' && (
+        <>
+          <div className="funds-cpr">
+            <div className="container">
+              <div className="f-card card py-4 px-3 p-4">
+                <div className="row justify-content-between mb-3 mb-md-0 f-initial-info">
+                    <div className="col-auto">
+                      <span>Nº 016/2018 Produto: <strong>Uréia composto</strong> </span>
+                    </div>
+                    <div className="col-auto">
+                      <span>Quantidade: <strong>98.000 Kg</strong></span>
+                    </div>
+                    <div className="col-auto">
+                      <span>Emitente 1: <strong>Franciscleison Pereira</strong></span>
+                    </div>
+                </div>
+                <div className="row align-items-center">
+                  <div className="col-lg-6">
+                    <div>
+                      <small className="text-muted fw-semibold">
+                        Total de tokens emitidos
+                        <GenericTooltip
+                          placement="top"
+                          content="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+                        >
+                          <i className='bi bi-info-circle-fill ms-1'></i>
+                        </GenericTooltip>
+                      </small>
+                    <p className="fs-4 fw-bold m-0">{parseInt(fertilizante?.supply).toFixed(2)} {fertilizante?.symbol}</p>
+                    </div>
+                    <div>
+                      <small className="text-muted fw-semibold">
+                        Total de tokens disponíveis na sua carteira
+                        <GenericTooltip
+                          placement="top"
+                          content="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+                        >
+                          <i className='bi bi-info-circle-fill ms-1'></i>
+                        </GenericTooltip>
+                      </small>
+                      <p className="fs-4 fw-bold m-0">{parseInt(fertilizante?.balance).toFixed(2)} {fertilizante?.symbol}</p>
+                    </div>
+                    <div>
+                      <small className="text-muted fw-semibold">
+                        Quantidade de real digital recebido na carteira
+                        <GenericTooltip
+                          placement="top"
+                          content="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+                        >
+                          <i className='bi bi-info-circle-fill ms-1'></i>
+                        </GenericTooltip>
+                      </small>
+                      <p className="fs-4 fw-bold m-0">{formatCurrency(fertilizante?.balance * 0.32)}</p>
+                    </div>
+                  </div>
+                  <div className="col-lg-6 mt-3 mt-md-0">
+                  <div className="d-flex align-items-center justify-content-center mx-auto" style={{ width: '100%', maxWidth: '100%', height: '300px' }}>
+                      <Doughnut 
+                        data={data} 
+                        options={options}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+        )}
+
+        {profile === 'cpr' && (
         <>
           <div className="funds-cpr">
             <div className="container">
@@ -109,7 +181,7 @@ const FundsInfo = ({ profile, balance, name, symbol }) => {
                           <i className='bi bi-info-circle-fill ms-1'></i>
                         </GenericTooltip>
                       </small>
-                    <p className="fs-4 fw-bold m-0">30.000 CPRMIL01</p>
+                    <p className="fs-4 fw-bold m-0">{parseInt(cpr?.supply).toFixed(2)} {cpr?.symbol}</p>
                     </div>
                     <div>
                       <small className="text-muted fw-semibold">
@@ -121,7 +193,7 @@ const FundsInfo = ({ profile, balance, name, symbol }) => {
                           <i className='bi bi-info-circle-fill ms-1'></i>
                         </GenericTooltip>
                       </small>
-                      <p className="fs-4 fw-bold m-0">14.000 CPRMIL01</p>
+                      <p className="fs-4 fw-bold m-0">{parseInt(cpr?.balance).toFixed(2)} {cpr?.symbol}</p>
                     </div>
                     <div>
                       <small className="text-muted fw-semibold">
@@ -133,7 +205,7 @@ const FundsInfo = ({ profile, balance, name, symbol }) => {
                           <i className='bi bi-info-circle-fill ms-1'></i>
                         </GenericTooltip>
                       </small>
-                      <p className="fs-4 fw-bold m-0"><small>R$</small> 127.000,00</p>
+                      <p className="fs-4 fw-bold m-0">{formatCurrency(cpr?.balance * 0.02)}</p>
                     </div>
                   </div>
                   <div className="col-lg-6 mt-3 mt-md-0">
