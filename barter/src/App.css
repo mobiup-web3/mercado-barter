@@ -11,6 +11,12 @@ ul{
     outline: none;
 }
 
+/* navbar
+--------------------*/
+.h-logo img{
+    width: 180px;
+}
+
 /* buttons
 ------------------*/
 .btn{

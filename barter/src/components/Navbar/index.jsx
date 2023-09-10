@@ -4,7 +4,6 @@ import { NavbarContainer } from './styles';
 import Logo from "../../assets/img/logo.png";
 
 const Navbar = ({wallet, profile}) => {
-  console.log("wallet", wallet, profile);
   if (wallet == undefined) {
     wallet = '0x000000000000000000000';
   }
