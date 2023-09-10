@@ -41,7 +41,13 @@ export const Onboarding = () => {
     <>
       <Container>
         <Navbar />
-        <GenericBreadcrumb previousPage={previousPage} currentPage="Onboarding" />
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-lg-8 px-0">
+              <GenericBreadcrumb previousPage={previousPage} currentPage="Onboarding" />
+            </div>
+          </div>
+        </div>
         <div className="container h-100">
           <div className="row justify-content-center h-100">
             <div className="col-lg-8 h-100">

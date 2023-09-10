@@ -57,7 +57,13 @@ export const Register = () => {
     <>
       <Container>
         <Navbar />
-        <GenericBreadcrumb currentPage="Registrar" />
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-lg-8 px-0">
+              <GenericBreadcrumb currentPage="Register" />
+            </div>
+          </div>
+        </div>
         <div className="container h-100">
           <div className="row justify-content-center h-100">
             <div className="col-lg-8 h-100">  

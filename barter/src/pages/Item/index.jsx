@@ -9,6 +9,8 @@ import { formatCurrency } from '../../utils/utils';
 import Web3 from 'web3';
 import { params } from '../../data/data';
 
+import DrexLogo from "../../assets/img/drex-box.png";
+
 // função para tratar parametro da url
 const findDataByParam = (param) => {
   const mockData = [
@@ -419,7 +421,7 @@ export const Item = () => {
                           </div>
                         </div>
                         <div className="d-flex align-items-center gap-2">
-                          <img src="https://stonoex.mobiup.io/assets/img/cofbr.svg" width="36" alt="" />
+                          <img src={ DrexLogo } width="36" alt="" />
                           <div>
                             <small className="text-muted fw-semibold">Preço RD</small>
                             <p className="fw-bold">{formatCurrency(fertilizante?.balance * 0.02)}</p>

@@ -7,6 +7,7 @@ import { formatCurrency } from '../../utils/utils';
 import GenericModal from "../GenericModal";
 import copyToClipboard from '../../utils/clipboard.js';
 import pixIcon from '../../assets/img/icon/pix.svg';
+import drexIcon from '../../assets/img/drex.png';
 import { params } from '../../data/data';
 import Web3 from 'web3';
 
@@ -329,7 +330,19 @@ const FundsInfo = ({ profile, cpr, fertilizante, rd, tradercpr, cprrd }) => {
                           <i className='bi bi-info-circle-fill ms-1'></i>
                         </GenericTooltip>
                       </small>
-                      <p className="fs-4 fw-bold m-0">{formatCurrency(parseInt(cprrd?.balance))}</p>
+                      <p className="fs-4 fw-bold m-0">{formatCurrency(parseInt(cprrd?.balance))} <img width="32" src={drexIcon} alt="DREX Logo" /></p>
+                    </div>
+                    <div>
+                      <small className="text-muted fw-semibold">
+                        Valor do CPR em Real
+                        <GenericTooltip
+                          placement="top"
+                          content="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+                        >
+                          <i className='bi bi-info-circle-fill ms-1'></i>
+                        </GenericTooltip>
+                      </small>
+                      <p className="fs-4 fw-bold m-0">CPRMIL005 / REAL = 599,00</p>
                     </div>
                   </div>
                   <div className="col-lg-6 mt-3 mt-md-0">
