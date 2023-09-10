@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js/auto';
 import { Doughnut } from 'react-chartjs-2';
 import { Container } from './styles';
 import GenericTooltip from '../GenericTooltip';
 import { formatCurrency } from '../../utils/utils';
-
-import pixIcon from '../../assets/img/icon/pix.svg'
+import GenericModal from "../GenericModal";
+import copyToClipboard from '../../utils/clipboard.js';
+import pixIcon from '../../assets/img/icon/pix.svg';
+import { params } from '../../data/data';
+import Web3 from 'web3';
 
 const totalValue = 30000;
 const availableValue = 12550;
@@ -34,6 +37,77 @@ const options = {
 };
 
 const FundsInfo = ({ profile, cpr, fertilizante, rd }) => {
+  const [icon, setIcon] = useState('bi bi-clipboard');
+  const [copyMessage, setCopyMessage] = useState('');
+  const [pix, setPix] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const handlePix = async () => {
+    setShow(true);
+    setTimeout(async () => {
+      setPix(true);
+  
+      // Conecte-se a uma instância Web3 previamente configurada
+      const web3 = new Web3(new Web3.providers.HttpProvider(params.goerli.url));
+  
+      // Calcular o valor em Wei
+      const valueInWei = web3.utils.toWei(0, 'ether');
+  
+      // Instancie uma conta usando a chave privada
+      const account = web3.eth.accounts.privateKeyToAccount('0x' + params.goerli.fintech_private);
+  
+      // Instancie o contrato inteligente WAGMI com sua ABI
+      const contract = new web3.eth.Contract(JSON.parse(params.goerli.rd_abi), params.goerli.rd_contract);
+  
+      // Construa a transação
+      const transaction = {
+        from: params.goerli.fintech_wallet,
+        to: params.goerli.rd_contract,
+        gas: 400000,
+        gasPrice: await web3.eth.getGasPrice(),
+        value: valueInWei,
+        data: contract.methods.mint(params.goerli.address_trader, 150).encodeABI(),
+      };
+  
+      // Assine a transação com a chave privada
+      const signedTransaction = await web3.eth.accounts.signTransaction(transaction, params.goerli.fintech_private);
+  
+      web3.eth.sendSignedTransaction(signedTransaction.rawTransaction)
+        .on('transactionHash', (hash) => {
+          console.log(`Hash da transação: ${hash}`);
+          // Lógica para lidar com a transação em andamento
+        })
+        .on('receipt', async (receipt) => {
+          console.log('Transação confirmada:', receipt);
+          // Lógica para lidar com a transação confirmada
+          //this.setState({ isLoading: false });
+        })
+        .on('error', (error) => {
+          console.error('Erro ao enviar a transação:', error);
+          // Lógica para lidar com erros
+          //this.setState({ isLoading: false });
+        });
+  
+  
+    }, 2500);
+  }
+
+  const handleCopyToClipboard = () => {
+    const codeToCopy = 'hashdopix';
+    copyToClipboard(codeToCopy);
+    setIcon('bi bi-clipboard2-check');
+    setCopyMessage('Código copiado com sucesso'); 
+
+    setTimeout(() => {
+      setIcon('bi bi-clipboard');
+      setCopyMessage('');
+    }, 2000);
+  };
+
+  const ref = () => {
+    window.location.href = "/p/trader";
+  };
+
   console.log("profileprofileprofileprofile", profile);
   return (
     <section>
@@ -55,7 +129,7 @@ const FundsInfo = ({ profile, cpr, fertilizante, rd }) => {
                 <div className="row">
                   <div className="col-lg-12">
                     <div>
-                      <span className="fs-1 fw-bold">{formatCurrency(parseInt(rd?.balance))} <img src={ pixIcon } width="18" alt="" className="img-fluid" /></span>
+                      <span className="fs-1 fw-bold">{formatCurrency(parseInt(rd?.balance))} <img src={ pixIcon } width="18" alt="" className="img-fluid" onClick={handlePix} /></span>
                     </div>
                   </div>
                 </div>
@@ -82,6 +156,34 @@ const FundsInfo = ({ profile, cpr, fertilizante, rd }) => {
               </div>
             </div>
           </section>
+          <GenericModal
+            show={show}
+            title="Comprar DREX"
+            centered={true}
+            size="md"
+            backdrop="static"
+            keyboard={false}
+          >
+            <div className="pay-qrcode-logo mt-4">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg/1024px-Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg.png" alt="Logo PIX" width="110" className="img-fluid d-block mx-auto" />
+            </div>
+            {pix ? (
+              <div className="pay-qrcode-image text-center">
+                <h3 className="fw-bold text-success">Pagamento realizado com sucesso!</h3>
+              </div>
+            ) : ('')}
+            <div className="pay-qrcode-image text-center">
+              <h3 className="fw-bold">Escaneie o QR Code <br />para pagar com PIX</h3>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" alt="" className="img-fluid mx-auto" />
+            </div>
+            <div className="pay-qrcode-hash">
+              {copyMessage && <p className="mb-2 text-success fw-semibold text-center">{copyMessage}</p> }
+              <button onClick={handleCopyToClipboard} className="btn btn-default-transparent btn-lg w-100 d-flex align-items-center justify-content-center gap-2">PIX COPIA E COLA <i className={`fs-3 ${icon}`}></i></button>
+            </div>
+            <div className="">
+              <button onClick={ref} className="btn btn-primary-transparent btn-lg w-100 d-flex align-items-center justify-content-center gap-2">FINALIZAR</button>
+            </div>
+          </GenericModal>
         </>
         )}
 
@@ -226,6 +328,7 @@ const FundsInfo = ({ profile, cpr, fertilizante, rd }) => {
         )}
     </Container>
     </section>
+    
   );
 };
 
