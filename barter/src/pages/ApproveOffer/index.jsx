@@ -299,6 +299,7 @@ export const ApproveOffer = () => {
                   console.log('Swap Finish 1 Transação confirmada:', receipt);
                   // Lógica para lidar com a transação confirmada
 
+                  // ÚLTIMO PASSO PARA FINALIZAR O ATOMIC SWAP
                   const contractHtclEnd = new web3.eth.Contract(JSON.parse(params.goerli.htlc_abi), params.goerli.htlc_contract);
 
                   const swapIndexEnd = await contractHtclEnd.methods.swapIndex().call();
@@ -333,7 +334,7 @@ export const ApproveOffer = () => {
                       console.error('Swap Finish 2 Erro ao enviar a transação:', error);
                       // Lógica para lidar com erros
                     });
-
+                  // ÚLTIMO PASSO PARA FINALIZAR O ATOMIC SWAP
                 })
                 .on('error', (error) => {
                   setFormraw(true);
