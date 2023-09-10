@@ -10,4 +10,9 @@ export const NavbarContainer = styled.nav`
     .dropdown-toggle:after{
         content: none;
     }
+
+    .h-logo img{
+        width: 180px;
+    }
+
 `;
