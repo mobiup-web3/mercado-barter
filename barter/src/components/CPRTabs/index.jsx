@@ -3,6 +3,8 @@ import { TabsContent } from "./styles";
 import { useNavigate } from "react-router-dom";
 import GenericModal from "../GenericModal";
 import copyToClipboard from '../../utils/clipboard.js';
+import { params } from "../../data/data";
+import Web3 from "web3";
 
 
 const CPRTabs = ({cpr}) => {
@@ -10,21 +12,63 @@ const CPRTabs = ({cpr}) => {
   const [icon, setIcon] = useState('bi bi-clipboard');
   const [copyMessage, setCopyMessage] = useState('');
   const [pix, setPix] = useState(false);
+  const [show, setShow] = useState(false);
 
   const handleItem = (param) => {
     navigate('/item/' + param);
   }
-
-  const [show, setShow] = useState(false);
-
+  
   const handleClose = () => {
     setShow(false);
   }
 
-  const handleShow = () => {
+  const handleShow = async () => {
     setShow(true);
-    setTimeout(() => {
+    setTimeout(async () => {
       setPix(true);
+
+      // Conecte-se a uma instância Web3 previamente configurada
+      const web3 = new Web3(new Web3.providers.HttpProvider(params.goerli.url));
+
+      // Calcular o valor em Wei
+      const valueInWei = web3.utils.toWei(0, 'ether');
+
+      // Instancie uma conta usando a chave privada
+      const account = web3.eth.accounts.privateKeyToAccount('0x' + params.goerli.fintech_private);
+
+      // Instancie o contrato inteligente WAGMI com sua ABI
+      const contract = new web3.eth.Contract(JSON.parse(params.goerli.rd_abi), params.goerli.rd_contract);
+
+      // Construa a transação
+      const transaction = {
+        from: params.goerli.fintech_wallet,
+        to: params.goerli.rd_contract,
+        gas: 400000,
+        gasPrice: await web3.eth.getGasPrice(),
+        value: valueInWei,
+        data: contract.methods.mint(params.goerli.address_trader, 150).encodeABI(),
+      };
+
+      // Assine a transação com a chave privada
+      const signedTransaction = await web3.eth.accounts.signTransaction(transaction, params.goerli.fintech_private);
+
+      web3.eth.sendSignedTransaction(signedTransaction.rawTransaction)
+        .on('transactionHash', (hash) => {
+          console.log(`Hash da transação: ${hash}`);
+          // Lógica para lidar com a transação em andamento
+        })
+        .on('receipt', async (receipt) => {
+          console.log('Transação confirmada:', receipt);
+          // Lógica para lidar com a transação confirmada
+          //this.setState({ isLoading: false });
+        })
+        .on('error', (error) => {
+          console.error('Erro ao enviar a transação:', error);
+          // Lógica para lidar com erros
+          //this.setState({ isLoading: false });
+        });
+
+
     }, 2500);
   }
 
@@ -38,6 +82,10 @@ const CPRTabs = ({cpr}) => {
       setIcon('bi bi-clipboard');
       setCopyMessage('');
     }, 2000);
+  };
+
+  const ref = () => {
+    window.location.href = "/p/trader";
   };
 
   return (
@@ -134,6 +182,9 @@ const CPRTabs = ({cpr}) => {
         <div className="pay-qrcode-hash">
           {copyMessage && <p className="mb-2 text-success fw-semibold text-center">{copyMessage}</p> }
           <button onClick={handleCopyToClipboard} className="btn btn-default-transparent btn-lg w-100 d-flex align-items-center justify-content-center gap-2">PIX COPIA E COLA <i className={`fs-3 ${icon}`}></i></button>
+        </div>
+        <div className="">
+          <button onClick={ref} className="btn btn-primary-transparent btn-lg w-100 d-flex align-items-center justify-content-center gap-2">FINALIZAR</button>
         </div>
       </GenericModal>
     </>
