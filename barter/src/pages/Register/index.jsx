@@ -3,6 +3,8 @@ import { Container } from "./styles";
 import { Link, useNavigate } from "react-router-dom";
 import GenericBreadcrumb from '../../components/GenericBreadcrumb';
 
+import Navbar from '../../components/Navbar';
+
 export const Register = () => {
   const navigate = useNavigate();
 
@@ -54,6 +56,7 @@ export const Register = () => {
   return (
     <>
       <Container>
+        <Navbar />
         <GenericBreadcrumb currentPage="Registrar" />
         <div className="container h-100">
           <div className="row justify-content-center h-100">

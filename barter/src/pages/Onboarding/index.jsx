@@ -6,6 +6,8 @@ import cprIcon from "../../assets/img/icon/cpr.png";
 import supplierIcon from "../../assets/img/icon/supplier.png";
 import traderIcon from "../../assets/img/icon/trader.png";
 
+import Navbar from '../../components/Navbar';
+
 export const Onboarding = () => {
   const navigate = useNavigate();
 
@@ -38,6 +40,7 @@ export const Onboarding = () => {
   return (
     <>
       <Container>
+        <Navbar />
         <GenericBreadcrumb previousPage={previousPage} currentPage="Onboarding" />
         <div className="container h-100">
           <div className="row justify-content-center h-100">
