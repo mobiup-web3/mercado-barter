@@ -34,28 +34,68 @@ const CPRTabs = ({cpr}) => {
       const valueInWei = web3.utils.toWei(0, 'ether');
 
       // Instancie uma conta usando a chave privada
-      const account = web3.eth.accounts.privateKeyToAccount('0x' + params.goerli.fintech_private);
+      const account = web3.eth.accounts.privateKeyToAccount('0x' + params.goerli.my_private);
 
       // Instancie o contrato inteligente WAGMI com sua ABI
-      const contract = new web3.eth.Contract(JSON.parse(params.goerli.rd_abi), params.goerli.rd_contract);
+      const contract = new web3.eth.Contract(JSON.parse(params.goerli.jabi), params.goerli.cpr_contract_address);
 
       // Construa a transação
       const transaction = {
-        from: params.goerli.fintech_wallet,
-        to: params.goerli.rd_contract,
+        from: params.goerli.my_address,
+        to: params.goerli.cpr_contract_address,
         gas: 400000,
         gasPrice: await web3.eth.getGasPrice(),
         value: valueInWei,
-        data: contract.methods.mint(params.goerli.address_trader, 150).encodeABI(),
+        data: contract.methods.transfer(params.goerli.address_trader, 150).encodeABI(),
       };
 
       // Assine a transação com a chave privada
-      const signedTransaction = await web3.eth.accounts.signTransaction(transaction, params.goerli.fintech_private);
+      const signedTransaction = await web3.eth.accounts.signTransaction(transaction, params.goerli.my_private);
 
       web3.eth.sendSignedTransaction(signedTransaction.rawTransaction)
-        .on('transactionHash', (hash) => {
+        .on('transactionHash', async (hash) => {
           console.log(`Hash da transação: ${hash}`);
           // Lógica para lidar com a transação em andamento
+          // Conecte-se a uma instância Web3 previamente configurada
+          const web3 = new Web3(new Web3.providers.HttpProvider(params.goerli.url));
+      
+          // Calcular o valor em Wei
+          const valueInWei = web3.utils.toWei(0, 'ether');
+      
+          // Instancie uma conta usando a chave privada
+          const account = web3.eth.accounts.privateKeyToAccount('0x' + params.goerli.fintech_private);
+      
+          // Instancie o contrato inteligente WAGMI com sua ABI
+          const contract = new web3.eth.Contract(JSON.parse(params.goerli.rd_abi), params.goerli.rd_contract);
+      
+          // Construa a transação
+          const transaction = {
+            from: params.goerli.fintech_wallet,
+            to: params.goerli.rd_contract,
+            gas: 400000,
+            gasPrice: await web3.eth.getGasPrice(),
+            value: valueInWei,
+            data: contract.methods.mint(params.goerli.my_address, 150).encodeABI(),
+          };
+      
+          // Assine a transação com a chave privada
+          const signedTransaction = await web3.eth.accounts.signTransaction(transaction, params.goerli.fintech_private);
+      
+          web3.eth.sendSignedTransaction(signedTransaction.rawTransaction)
+            .on('transactionHash', (hash) => {
+              console.log(`Hash da transação: ${hash}`);
+              // Lógica para lidar com a transação em andamento
+            })
+            .on('receipt', async (receipt) => {
+              console.log('Transação confirmada:', receipt);
+              // Lógica para lidar com a transação confirmada
+              //this.setState({ isLoading: false });
+            })
+            .on('error', (error) => {
+              console.error('Erro ao enviar a transação:', error);
+              // Lógica para lidar com erros
+              //this.setState({ isLoading: false });
+            });
         })
         .on('receipt', async (receipt) => {
           console.log('Transação confirmada:', receipt);

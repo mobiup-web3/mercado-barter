@@ -2,7 +2,7 @@ import {Container, TabsContent} from './styles';
 import {useNavigate} from "react-router-dom";
 import { formatCurrency } from "../../utils/utils"
 
-const BarterTabs = ({fertilizante}) => {
+const BarterTabs = ({fertilizante, cpr}) => {
     const navigate = useNavigate();
 
     const handleItem = (param, fertilizante) => {
@@ -125,8 +125,8 @@ const BarterTabs = ({fertilizante}) => {
                                                     </div>
                                                 </div>
                                                 <div className="m-tabs-item-value">
-                                                    <small className="fw-semibold text-muted">Valor convertido para real digital</small>
-                                                    <p className='m-0'>R$ {formatCurrency(fertilizante?.balance * 0.35)}</p>
+                                                    <small className="fw-semibold text-muted">O que você vai pagar</small>
+                                                    <p className='m-0'>20 {cpr?.symbol} por SACA</p>
                                                 </div>
                                             </div>
                                         </div>

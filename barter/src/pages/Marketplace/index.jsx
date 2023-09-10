@@ -20,8 +20,11 @@ export const Marketplace = () => {
   const [fertilizante, setFertilizante] = useState({});
   const [realDigital, setRealDigital] = useState({});
   const [cpr, setCpr] = useState({});
+  const [tradercpr, setTradercpr] = useState({});
+  const [cprrd, setCprrd] = useState({});
   const [wallet, setWallet] = useState('');
-  // Função para buscar o saldo
+  
+
   const getBalanceData = async () => {
     const web3 = new Web3(params.goerli.url);
     const contract = new web3.eth.Contract(JSON.parse(params.goerli.jabi), params.goerli.cpr_contract_address);
@@ -45,6 +48,34 @@ export const Marketplace = () => {
         supply: cSupply.toString()
       });
       localStorage.setItem('cpr', cprJSON);
+    } catch (error) {
+      console.error('Erro ao buscar saldo:', error);
+    }
+  };
+
+  const getTraderCprData = async () => {
+    const web3 = new Web3(params.goerli.url);
+    const contract = new web3.eth.Contract(JSON.parse(params.goerli.jabi), params.goerli.cpr_contract_address);
+    const walletAddress = params.goerli.address_trader;
+
+    try {
+      const result = await contract.methods.balanceOf(walletAddress).call();
+      const cName = await contract.methods.name().call();
+      const cSymbol = await contract.methods.symbol().call();
+      const cSupply = await contract.methods.totalSupply().call();
+      setTradercpr({
+        name: cName,
+        symbol: cSymbol,
+        balance: result.toString(),
+        supply: cSupply.toString()
+      });
+      const tradercprJSON = JSON.stringify({
+        name: cName,
+        symbol: cSymbol,
+        balance: result.toString(),
+        supply: cSupply.toString()
+      });
+      localStorage.setItem('tradercpr', tradercprJSON);
     } catch (error) {
       console.error('Erro ao buscar saldo:', error);
     }
@@ -92,6 +123,27 @@ export const Marketplace = () => {
     }
   };
 
+  const getCprRealDigitalData = async () => {
+    const web3 = new Web3(params.goerli.url);
+    const contract = new web3.eth.Contract(JSON.parse(params.goerli.rd_abi), params.goerli.rd_contract);
+    const walletAddress = params.goerli.my_address;
+
+    try {
+      const result = await contract.methods.balanceOf(walletAddress).call();
+      const cName = await contract.methods.name().call();
+      const cSymbol = await contract.methods.symbol().call();
+      const cSupply = await contract.methods.totalSupply().call();
+      setCprrd({
+        name: cName,
+        symbol: cSymbol,
+        balance: result.toString(),
+        supply: cSupply.toString()
+      });
+    } catch (error) {
+      console.error('Erro ao buscar saldo:', error);
+    }
+  };
+
   useEffect(() => {
     if (!expectedProfiles.includes(profile)) {
       navigate('/404');
@@ -99,6 +151,8 @@ export const Marketplace = () => {
     getBalanceData();
     getFertilizanteData();
     getRealDigitalData();
+    getTraderCprData();
+    getCprRealDigitalData();
 
     localStorage.setItem('profile', profile);
     
@@ -138,7 +192,7 @@ export const Marketplace = () => {
     <Container>
         <NavbarExtend wallet={wallet} profile={profile} />
         <GenericBreadcrumb currentPage="Marketplace" previousPage={previousPage} />
-        <FundsInfo profile={profile} cpr={cpr} fertilizante={fertilizante} rd={realDigital} />
+        <FundsInfo profile={profile} cpr={cpr} fertilizante={fertilizante} rd={realDigital} tradercpr={tradercpr} cprrd={cprrd} />
         
         {profile === 'cpr' && (
         <>
@@ -164,7 +218,7 @@ export const Marketplace = () => {
                             <div className="tab-content" id="nav-tabContent">
                                 <div className="tab-pane fade" id="list-one" role="tabpanel" aria-labelledby="list-home-list">...</div>
                                 <div className="tab-pane fade show active" id="list-two" role="tabpanel" aria-labelledby="list-profile-list">
-                                    <BarterTabs fertilizante={fertilizante} />
+                                    <BarterTabs fertilizante={fertilizante} cpr={cpr} />
                                 </div>
                                 <div className="tab-pane fade" id="list-three" role="tabpanel" aria-labelledby="list-messages-list">...</div>
                             </div>

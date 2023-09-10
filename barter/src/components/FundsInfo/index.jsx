@@ -36,7 +36,7 @@ const options = {
   },
 };
 
-const FundsInfo = ({ profile, cpr, fertilizante, rd }) => {
+const FundsInfo = ({ profile, cpr, fertilizante, rd, tradercpr, cprrd }) => {
   const [icon, setIcon] = useState('bi bi-clipboard');
   const [copyMessage, setCopyMessage] = useState('');
   const [pix, setPix] = useState(false);
@@ -133,6 +133,26 @@ const FundsInfo = ({ profile, cpr, fertilizante, rd }) => {
                     </div>
                   </div>
                 </div>
+
+
+                <div className="row align-items-center">
+                  <div className="col-lg-6">
+                    <div>
+                      <small className="text-muted fw-semibold">
+                        Total de tokens disponíveis na sua carteira
+                        <GenericTooltip
+                          placement="top"
+                          content="Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+                        >
+                          <i className='bi bi-info-circle-fill ms-1'></i>
+                        </GenericTooltip>
+                      </small>
+                      <p className="fs-4 fw-bold m-0">{parseInt(tradercpr?.balance).toFixed(2)} {tradercpr?.symbol}</p>
+                    </div>
+                  </div>
+                </div>
+
+
                 <div className="row justify-content-between align-items-center">
                   <div className="col-auto mt-3 mt-md-0">
                     <div className="d-flex align-items-start gap-2">
@@ -309,7 +329,7 @@ const FundsInfo = ({ profile, cpr, fertilizante, rd }) => {
                           <i className='bi bi-info-circle-fill ms-1'></i>
                         </GenericTooltip>
                       </small>
-                      <p className="fs-4 fw-bold m-0">{formatCurrency(cpr?.balance * 0.02)}</p>
+                      <p className="fs-4 fw-bold m-0">{formatCurrency(parseInt(cprrd?.balance))}</p>
                     </div>
                   </div>
                   <div className="col-lg-6 mt-3 mt-md-0">
