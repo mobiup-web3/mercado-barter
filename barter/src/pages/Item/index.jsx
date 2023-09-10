@@ -77,6 +77,8 @@ export const Item = () => {
   const navigate = useNavigate(); 
   const itemData = findDataByParam(item);
   const [show, setShow] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
+  const [modalTitle, setModalTitle] = useState('Fazer Oferta');
   const [selectedValue, setSelectedValue] = useState(null);
   const [offerValue, setOfferValue] = useState('');
   const [profile, setProfile] = useState('');
@@ -85,6 +87,7 @@ export const Item = () => {
   const [linkConfirmacao, setLinkConfirmacao] = useState('');
   const [formraw, setFormraw] = useState(true);
   const [blockchain, setBlockchain] = useState(false);
+  const [waitingStep, setWaitingStep] = useState(false);
   const [statusBlockchain, setStatusBlockchain] = useState(false);
   const [error, setError] = useState({
     selectedValue: '',
@@ -101,6 +104,10 @@ export const Item = () => {
     setShow(false);
   }
   const handleShow = () => {
+    setFormraw(true);
+    setWaitingStep(false);
+    setBlockchain(false);
+    setShowHeader(true);
     setShow(true);
   }
 
@@ -232,6 +239,9 @@ export const Item = () => {
 
 
       setFormraw(false);
+      setWaitingStep(true);
+      setShowHeader(false);
+      setModalTitle('Aguarde');
       // Conecte-se a uma instância Web3 previamente configurada
       const web3 = new Web3(new Web3.providers.HttpProvider(params.goerli.url));
 
@@ -260,7 +270,10 @@ export const Item = () => {
 
       web3.eth.sendSignedTransaction(signedTransaction.rawTransaction)
         .on('transactionHash', (hash) => {
+          setWaitingStep(false);
           setBlockchain(true);
+          setShowHeader(true);
+          setModalTitle('Fazer Oferta');
           console.log(`Hash da transação: ${hash}`);
           setLinkAprovacao(params.goerli.scan + hash);
           // Lógica para lidar com a transação em andamento
@@ -392,8 +405,9 @@ export const Item = () => {
       </Container>
       <GenericModal
         show={show}
+        showHeader={showHeader}
         handleClose={handleClose}
-        title="Fazer Oferta"
+        title={modalTitle}
         centered={true}
         size="md"
         backdrop="static"
@@ -436,6 +450,16 @@ export const Item = () => {
           <button type="submit" className="btn btn-default w-100 text-uppercase">Enviar Oferta</button>
         </form>
         ) : ('')}
+
+        {waitingStep && (
+          <div className="text-center h-100 d-flex flex-column align-items-center justify-content-center gap-3 py-5" style={{minHeight: '325px'}}>
+            <h3 className="m-0 fw-semibold">Aguarde enquanto processamos sua transação...</h3>
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        )}
+
         {blockchain ? (
           <div className="container">
             <div className="row justify-content-center">

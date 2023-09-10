@@ -109,7 +109,7 @@ const BarterTabs = ({fertilizante}) => {
                                             className="m-tabs-item py-3 d-flex align-items-start gap-3">
                                             <i className="link-icon bi bi-chevron-right"></i>
                                             <div className="m-tabs-item-media">
-                                                <img src="https://http2.mlstatic.com/D_NQ_NP_970839-MLU69446511865_052023-O.webp" alt="" className="rounded img-fluid"/>
+                                                <img src="https://cdn.awsli.com.br/2500x2500/1751/1751727/produto/223379489/embalagem_ureia-zfqd9214q6.png" alt="" className="rounded img-fluid"/>
                                             </div>
                                             <div className="m-tabs-item-info">
                                                 <h4 className="m-tabs-item-title mb-3 text-uppercase fw-bold">{fertilizante?.name}</h4>
