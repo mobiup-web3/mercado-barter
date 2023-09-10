@@ -6,7 +6,7 @@ export const Container = styled.div`
     article{
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        // justify-content: space-between;
         height: 100%;
     }
 

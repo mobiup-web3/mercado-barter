@@ -129,7 +129,7 @@ export const Onboarding = () => {
                   )}
                 </div>
 
-                <div className="o-footer">
+                <div className="o-footer mt-5">
                   <Link
                     to="/"
                     className="btn fw-semibold text-muted btn-sm px-0"

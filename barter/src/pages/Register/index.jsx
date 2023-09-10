@@ -83,7 +83,7 @@ export const Register = () => {
                     </div>
                   </div>
                 </div>
-                <div className="o-footer">
+                <div className="o-footer mt-5">
                   <Link to="/" className="btn fw-semibold text-muted btn-sm px-0">Início</Link>
                   <button onClick={handleSubmit} className="btn btn-sm btn-default">Continuar</button>
                 </div>
