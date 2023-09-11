@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Container } from "./styles";
 import { TabsContent } from "../../components/BarterTabs/styles";
 import NavbarExtend from "../../components/NavbarExtend";
+import GenericAlert from '../../components/GenericAlert';
 import FundsInfo from "../../components/FundsInfo";
 import BarterTabs from "../../components/BarterTabs";
 import CPRTabs from "../../components/CPRTabs";
@@ -217,6 +218,20 @@ export const Marketplace = () => {
     <Container>
         <NavbarExtend wallet={wallet} profile={profile} />
         <GenericBreadcrumb currentPage="Marketplace" previousPage={previousPage} />
+
+        {profile === 'supplier' && (
+          <GenericAlert
+            type="info"
+            icon="exclamation-circle"
+            title="Você recebeu uma nova oferta pelo produto"
+            product="Milho em grãos"
+            description="Você recebeu uma nova oferta por um de seus produtos. Clique para visualizar."
+            showButton={true}
+            textButton="Visualizar oferta"
+            linkButton="/approve-offer/milho-cpr"
+          />
+        )}
+
         <FundsInfo profile={profile} cpr={cpr} fertilizante={fertilizante} rd={realDigital} tradercpr={tradercpr} cprrd={cprrd} />
         
         {profile === 'cpr' && (
@@ -258,16 +273,16 @@ export const Marketplace = () => {
         <>
             <section className="view-cpr mt-5 mb-3">
                 <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <div className="m-tabs-menu">
-                                <div className="list-group list-group-horizontal" id="list-tab" role="tablist">
-                                    <a className="list-group-item list-group-item-action disabled" aria-disabled="true" id="list-two-list" data-bs-toggle="list" href="#list-two" role="tab" aria-controls="list-profile">Status das Transações</a>
-                                    <a className="list-group-item list-group-item-action active" id="list-one-list" data-bs-toggle="list" href="#list-one" role="tab" aria-controls="list-home">Ofertas <br /> recebidas</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  <div className="row">
+                      <div className="col-lg-12">
+                          <div className="m-tabs-menu">
+                              <div className="list-group list-group-horizontal" id="list-tab" role="tablist">
+                                  <a className="list-group-item list-group-item-action disabled" aria-disabled="true" id="list-two-list" data-bs-toggle="list" href="#list-two" role="tab" aria-controls="list-profile">Status das Transações</a>
+                                  <a className="list-group-item list-group-item-action active" id="list-one-list" data-bs-toggle="list" href="#list-one" role="tab" aria-controls="list-home">Ofertas <br /> recebidas</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
                 </div>
             </section>
 

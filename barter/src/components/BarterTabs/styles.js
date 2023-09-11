@@ -1,13 +1,13 @@
 import { styled } from 'styled-components';
 
-export const Container = styled.nav`
+export const Container = styled.div`
     .m-tabs-menu{
         overflow-x: auto;
     }
 `;
 
 
-export const TabsContent = styled.nav`
+export const TabsContent = styled.div`
     .m-tabs-menu{
         overflow-x: auto;
     }

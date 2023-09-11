@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const Container = styled.nav`
+export const Container = styled.div`
     margin-top: 1.5rem;
 
     small{
