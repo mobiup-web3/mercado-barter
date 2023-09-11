@@ -33,6 +33,7 @@ npm run dev
   - BRIDGE - https://explorer.lachain.network/address/0x0F716dB95D09c4fe30e071a66623ad92A5F2D708/contracts#address-tabs
 
 ## ICP HTTP CALL Utilização
+- Utilizamos o serviço HTTP CALL para busca de preços dos ativos tokenizados de uma forma mais eficaz
 <div align="center">
-	<img src="https://barter-32420.web.app/assets/print-1-icp-call-http-get-price.jpg" alt="">
+	<img src="https://mobiup.io/print-icp-call-http-price.png" alt="">
 </div>
