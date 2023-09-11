@@ -8,10 +8,12 @@ MercadoBarter is an innovative digital platform aimed at revolutionizing the agr
 
 - Acesse o diretório barter
 - Abra seu Prompt de Comando no diretório barter
-- Execute npm install
+- Execute npm install (Para instalar as bibliotecas necessárias)
+- Execute o projeto npm run dev
 ```bash
 cd barter
-npm insall
+npm install
+npm run dev
 ```
 
 ## Redes Utilizadas
