@@ -1,4 +1,7 @@
-# Mercado Barter
+<div align="center">
+	<img src="https://barter-32420.web.app/assets/logo-5be8a8e9.png" alt="">
+</div>
+
 MercadoBarter is an innovative digital platform aimed at revolutionizing the agricultural sector by providing comprehensive solutions for farmers and investors.
 
 # Requisitos Técnicos
@@ -28,3 +31,8 @@ npm run dev
   - CPR MILHO(Cédula de Produto Rural) - https://explorer.lachain.network/address/0x4E719E4a41fb9BAdb354081EcAD236Adc7959E42/contracts#address-tabs
   - UREIA(Fertilizante) - https://explorer.lachain.network/address/0x1225033EbB3B455a637c60Eb3c1FEb336f99e48A/contracts#address-tabs
   - BRIDGE - https://explorer.lachain.network/address/0x0F716dB95D09c4fe30e071a66623ad92A5F2D708/contracts#address-tabs
+
+## ICP HTTP CALL Utilização
+<div align="center">
+	<img src="https://barter-32420.web.app/assets/print-1-icp-call-http-get-price.jpg" alt="">
+</div>
