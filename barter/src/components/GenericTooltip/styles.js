@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const ModalContainer = styled.nav`
+export const ModalContainer = styled.div`
 
 i-resume-checkout{
     border-radius: 12px;

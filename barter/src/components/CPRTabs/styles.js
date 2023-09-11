@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const TabsContent = styled.nav`
+export const TabsContent = styled.div`
     .m-tabs-menu{
         overflow-x: auto;
     }
