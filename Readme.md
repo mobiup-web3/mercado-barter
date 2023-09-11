@@ -19,6 +19,12 @@ npm install
 npm run dev
 ```
 
+## Smart Contracts
+
+- No diretório contracts, estará todos os códigos fontes utilizando para este projeto.
+- Utilizando soluções de tokenização de ativos, interoperabilidade desses ativos, e utilizados da rede DREX com o Real Digital, simulando uma instituição financeira.
+- Utilizamos o conceito de SmartWallets para evitar o atrito de utilização de serviços externos pelo usuário final, tendo em vista que será utilizado um relay para execução do gas em cada transação. 
+
 ## Redes Utilizadas
 - Goerli(Simulando a rede DREX Hyperledger BESU)
   - REAL DIGITAL - https://goerli.etherscan.io/address/0x4E719E4a41fb9BAdb354081EcAD236Adc7959E42#code
